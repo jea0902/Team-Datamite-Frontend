@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Seoul Namsan';
+    src: url('../assets/font/SeoulNamsan.ttf') format('truetype');
+    /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
+  }
+
+body {
+    font-family: 'Seoul Namsan';
+}
