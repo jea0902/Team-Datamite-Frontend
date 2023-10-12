@@ -15,11 +15,11 @@ function MemberChat() {
     const [showHospitalReview, setShowHospitalReview] = useState(false);
     const [selectedMarkerInfo, setSelectedMarkerInfo] = useState(null); // 마커를 눌렀을 때의 병원이름 저장 변수
     const [hospitalReview, setHospitalReview] = useState({
-        keywords: '',
-        negativeReview: 0,
-        positiveReview: 0,
-        rating: 0.0,
-        totalReviews: 0
+        keywords: '친절함, 쁘띠',
+        negativeReview: 30,
+        positiveReview: 217,
+        rating: 8.7,
+        totalReviews: 300
     });
 
     // 마커 정보를 받아와 처리하는 함수
@@ -28,30 +28,30 @@ function MemberChat() {
         setSelectedMarkerInfo(hospitalName);
     };
 
-    useEffect(() => {
-        // console.log("병원이름", selectedMarkerInfo)
+    // useEffect(() => {
+    //     // console.log("병원이름", selectedMarkerInfo)
 
-        if (selectedMarkerInfo !== '' && selectedMarkerInfo !== null) {
-            async function getHospitalReview() {
-                const response = await axios.post('http://localhost:8080/api/get/hospital_review', {
-                    hospitalName: selectedMarkerInfo
-                })
+    //     if (selectedMarkerInfo !== '' && selectedMarkerInfo !== null) {
+    //         async function getHospitalReview() {
+    //             const response = await axios.post('http://localhost:8080/api/get/hospital_review', {
+    //                 hospitalName: selectedMarkerInfo
+    //             })
 
-                if (response.status === 200) {
-                    console.log(response)
-                    setHospitalReview(response.data)
-                    if (response.data === '') {
-                        setShowHospitalReview(false)
-                    } else {
-                        setShowHospitalReview(true)
-                    }
-                }
-            }
-            getHospitalReview();
-        } else {
-            setShowHospitalReview(false)
-        }
-    }, [selectedMarkerInfo])
+    //             if (response.status === 200) {
+    //                 console.log(response)
+    //                 setHospitalReview(response.data)
+    //                 if (response.data === '') {
+    //                     setShowHospitalReview(false)
+    //                 } else {
+    //                     setShowHospitalReview(true)
+    //                 }
+    //             }
+    //         }
+    //         getHospitalReview();
+    //     } else {
+    //         setShowHospitalReview(false)
+    //     }
+    // }, [selectedMarkerInfo])
 
     // 메세지 관련
     const [messages, setMessages] = useState([]); // 메시지 목록

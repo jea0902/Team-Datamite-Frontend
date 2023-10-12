@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.min.js"
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -6,8 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState, createContext } from "react";
 import Navbar from "./Navbar";
 
-import {IsLoginProvider} from "./AuthContext";
-import {useIsLoginState} from "./AuthContext";
+import { IsLoginProvider } from "./AuthContext";
+import { useIsLoginState } from "./AuthContext";
 import { useUserData } from "./AuthContext";
 
 import Main from "./Main";
@@ -25,11 +25,11 @@ import NonMemberChat from "./NonMemberChat";
 import MemberChat from "./MemberChat";
 import AuthContext from "./AuthContext";
 
-import KakaoMap from "./KakaoMap/KakaoMap"
+import KakaoMap from "./KakaoMap/KakaoMap";
 import ImageQuestion from "./ImageQuestion";
+import MyChatHistory from "./MyChatHistory";
 
 function App() {
-
   const isLogin = useIsLoginState();
   const userData = useUserData();
 
@@ -54,7 +54,10 @@ function App() {
               <Route path="/find-id" element={<FindId />} />
               <Route path="/find-id/success" element={<FindIdSuccess />} />
               <Route path="/find-password" element={<FindPassword />} />
-              <Route path="/find-password/success" element={<FindPasswordSuccess />} />
+              <Route
+                path="/find-password/success"
+                element={<FindPasswordSuccess />}
+              />
               <Route path="/mypage" element={<Mypage />} />
               {/* <Route path="/mypage" element={<Sidebar/>}/> */}
               {/* <Route path="/chat" element={<NonMemberChat />} /> */}
@@ -63,15 +66,17 @@ function App() {
               ) : (
                 <Route path="/chat" element={<NonMemberChat />} />
               )}
-              <Route path="/kakaomap" element={<KakaoMap/>}/>
+              <Route path="/kakaomap" element={<KakaoMap />} />
               {/* <Route path="/image" element={<ImageQuestion />} /> */}
+
+              <Route path="/mychat" element={<MyChatHistory />} />
             </Routes>
           </div>
           {/* </div> */}
           {/* </div>
           </div> */}
         </BrowserRouter>
-      </IsLoginProvider >
+      </IsLoginProvider>
     </>
   );
 }
