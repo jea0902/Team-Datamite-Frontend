@@ -13,25 +13,27 @@ export default function MyChatHistory() {
 
     async function getChatHisoty() {
       try {
-        const response = await axios.get('http://localhost:8080/api/mypage/chat-history', {
-          headers: {
-            Authorization: accessToken,
-            'Content-Type': 'application/json'
+        const response = await axios.get(
+          "http://localhost:8080/api/mypage/chat-history",
+          {
+            headers: {
+              Authorization: accessToken,
+              "Content-Type": "application/json",
+            },
           }
-        })
+        );
 
         if (response.status === 200) {
           setChats(response.data);
           // console.log(response.data);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
 
     getChatHisoty();
-
-  },[])
+  }, []);
 
   const handleRowClick = (chatId) => {
     navigate(`/mychat/chatId=${chatId}`);
@@ -45,7 +47,10 @@ export default function MyChatHistory() {
       >
         <table className="table">
           <thead>
-            <tr className="table-primary" style={{ backgroundColor: "#8ec6e6" }}>
+            <tr
+              className="table-primary"
+              style={{ backgroundColor: "#8ec6e6" }}
+            >
               <th
                 className="text-center"
                 scope="col"
