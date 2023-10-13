@@ -28,6 +28,7 @@ import AuthContext from "./AuthContext";
 import KakaoMap from "./KakaoMap/KakaoMap";
 import ImageQuestion from "./ImageQuestion";
 import MyChatHistory from "./MyChatHistory";
+import ChatDetail from "./ChatDetail";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -70,6 +71,7 @@ function App() {
               {/* <Route path="/image" element={<ImageQuestion />} /> */}
 
               <Route path="/mychat" element={<MyChatHistory />} />
+              <Route path="mychat/chatId=:chatId" element={<ChatDetail />} />
             </Routes>
           </div>
           {/* </div> */}

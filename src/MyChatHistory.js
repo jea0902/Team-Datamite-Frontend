@@ -34,11 +34,41 @@ export default function MyChatHistory({ accessToken }) {
   const mockData = [
     {
       chatId: 1,
-      memberId: "user123",
+      memberId: "동일한 아이디",
       createDate: "2023-10-12T07:33:59.153+00:00",
       messageList: [
         {
           content: "치과",
+        },
+      ],
+    },
+    {
+      chatId: 2,
+      memberId: "동일한 아이디",
+      createDate: "2023-10-12T07:33:59.153+00:01",
+      messageList: [
+        {
+          content: "내과",
+        },
+      ],
+    },
+    {
+      chatId: 3,
+      memberId: "동일한 아이디",
+      createDate: "2023-10-13T07:33:59.153+00:01",
+      messageList: [
+        {
+          content: "이비인후과",
+        },
+      ],
+    },
+    {
+      chatId: 4,
+      memberId: "동일한 아이디",
+      createDate: "2023-10-17T07:33:59.153+00:11",
+      messageList: [
+        {
+          content: "신경외과",
         },
       ],
     },
@@ -50,19 +80,35 @@ export default function MyChatHistory({ accessToken }) {
       className="table-responsive d-flex justify-content-center"
       style={{ paddingTop: "10vh" }}
     >
-      <table className="table align-middle">
+      <table className="table">
         <thead>
-          <tr>
-            <th scope="col" style={{ padding: "10px 20px" }}>
+          <tr className="table-primary" style={{ backgroundColor: "#34b4fc" }}>
+            <th
+              className="text-center"
+              scope="col"
+              style={{ padding: "10px 20px" }}
+            >
               채팅 번호
             </th>
-            <th scope="col" style={{ padding: "10px 20px" }}>
+            <th
+              className="text-center"
+              scope="col"
+              style={{ padding: "10px 20px" }}
+            >
               멤버 아이디
             </th>
-            <th scope="col" style={{ padding: "10px 20px" }}>
+            <th
+              className="text-center"
+              scope="col"
+              style={{ padding: "10px 20px" }}
+            >
               채팅한 날짜
             </th>
-            <th scope="col" style={{ padding: "10px 20px" }}>
+            <th
+              className="text-center"
+              scope="col"
+              style={{ padding: "10px 20px" }}
+            >
               진료과
             </th>
           </tr>

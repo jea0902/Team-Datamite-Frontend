@@ -1,0 +1,8 @@
+.chatRow {
+  transition: background-color 0.3s;
+  /* 부드러운 전환효과 */
+}
+
+.chatRow:hover td {
+  background-color: lightblue !important;
+}
