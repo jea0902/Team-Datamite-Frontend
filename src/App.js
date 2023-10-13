@@ -60,16 +60,13 @@ function App() {
                 element={<FindPasswordSuccess />}
               />
               <Route path="/mypage" element={<Mypage />} />
-              {/* <Route path="/mypage" element={<Sidebar/>}/> */}
-              {/* <Route path="/chat" element={<NonMemberChat />} /> */}
               {isLogin ? (
                 <Route path="/chat" element={<MemberChat />} />
               ) : (
                 <Route path="/chat" element={<NonMemberChat />} />
               )}
               <Route path="/kakaomap" element={<KakaoMap />} />
-              {/* <Route path="/image" element={<ImageQuestion />} /> */}
-
+              <Route path="/image" element={<ImageQuestion />} />
               <Route path="/mychat" element={<MyChatHistory />} />
               <Route path="mychat/chatId=:chatId" element={<ChatDetail />} />
             </Routes>

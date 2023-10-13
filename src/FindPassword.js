@@ -175,10 +175,11 @@ function FindPassword() {
                                     <option value="daum.net">daum.net</option>
                                 </select>
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn"
                                     type="button"
                                     onClick={sendNumber}
-                                    
+                                    disabled={id === "" | name === "" || birthday8 === "" | !sendOk}
+                                    style={{ backgroundColor: "#8ec6e6", color:"white" }}
                                 >인증번호 전송</button>
                             </div>
                             {emailError && <div style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{emailError}
@@ -194,10 +195,11 @@ function FindPassword() {
                                     type="text" name="authNum" id="authNum" className="form-control input-icon-placeholder5"
                                 />
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn"
                                     type="button"
                                     onClick={confirmNumber}
-                                    disabled={!confirmationNumber}>
+                                    disabled={!confirmationNumber}
+                                    style={{ backgroundColor: "#8ec6e6", color:"white" }}>
                                     인증번호 확인</button>
                             </div>
                             <div>
@@ -206,7 +208,7 @@ function FindPassword() {
                             </div>
                         </div>
                         <div className="d-grid gap-2">
-                            <button className="btn btn-secondary" type="submit" onClick={onClick} disabled={!isConfirmed}>확인</button>
+                            <button className="btn" type="submit" onClick={onClick} disabled={!isConfirmed} style={{ backgroundColor: "#8ec6e6", color:"white" }}>확인</button>
                         </div>
                     </form>
                 </div>

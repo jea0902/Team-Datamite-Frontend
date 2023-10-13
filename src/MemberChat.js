@@ -15,11 +15,11 @@ function MemberChat() {
     const [showHospitalReview, setShowHospitalReview] = useState(false);
     const [selectedMarkerInfo, setSelectedMarkerInfo] = useState(null); // 마커를 눌렀을 때의 병원이름 저장 변수
     const [hospitalReview, setHospitalReview] = useState({
-        keywords: '친절함, 쁘띠',
-        negativeReview: 30,
-        positiveReview: 217,
-        rating: 8.7,
-        totalReviews: 300
+        keywords: '',
+        negativeReview: 0,
+        positiveReview: 0,
+        rating: 0.0,
+        totalReviews: 0
     });
 
     // 마커 정보를 받아와 처리하는 함수
@@ -28,30 +28,30 @@ function MemberChat() {
         setSelectedMarkerInfo(hospitalName);
     };
 
-    // useEffect(() => {
-    //     // console.log("병원이름", selectedMarkerInfo)
+    useEffect(() => {
+        // console.log("병원이름", selectedMarkerInfo)
 
-    //     if (selectedMarkerInfo !== '' && selectedMarkerInfo !== null) {
-    //         async function getHospitalReview() {
-    //             const response = await axios.post('http://localhost:8080/api/get/hospital_review', {
-    //                 hospitalName: selectedMarkerInfo
-    //             })
+        if (selectedMarkerInfo !== '' && selectedMarkerInfo !== null) {
+            async function getHospitalReview() {
+                const response = await axios.post('http://localhost:8080/api/get/hospital_review', {
+                    hospitalName: selectedMarkerInfo
+                })
 
-    //             if (response.status === 200) {
-    //                 console.log(response)
-    //                 setHospitalReview(response.data)
-    //                 if (response.data === '') {
-    //                     setShowHospitalReview(false)
-    //                 } else {
-    //                     setShowHospitalReview(true)
-    //                 }
-    //             }
-    //         }
-    //         getHospitalReview();
-    //     } else {
-    //         setShowHospitalReview(false)
-    //     }
-    // }, [selectedMarkerInfo])
+                if (response.status === 200) {
+                    console.log(response)
+                    setHospitalReview(response.data)
+                    if (response.data === '') {
+                        setShowHospitalReview(false)
+                    } else {
+                        setShowHospitalReview(true)
+                    }
+                }
+            }
+            getHospitalReview();
+        } else {
+            setShowHospitalReview(false)
+        }
+    }, [selectedMarkerInfo])
 
     // 메세지 관련
     const [messages, setMessages] = useState([]); // 메시지 목록
@@ -184,7 +184,7 @@ function MemberChat() {
     //     fetchServer();
 
     // }, [messages]);
-    
+
 
     // 메시지 목록이 업데이트
     useEffect(() => {
@@ -199,20 +199,22 @@ function MemberChat() {
                 const firstServerResponse = await callModelServer();
                 firstProbability = firstServerResponse.top_probability
                 // console.log(firstProbability)
-                setIsLoading(true)
 
+                setIsLoading(true)
                 if (firstProbability >= 0.8) {
                     setTimeout(() =>
                         addServerMessage(firstServerResponse.speciality) // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
-                        , 1000);
+                        , 2000);
 
-                    firstServerResponse.symptoms.forEach(symptom => {
-                        setTimeout(() => addServerMessage(symptom), 1000);
-                    });
+                    setIsLoading(true)
+                    const symptoms = firstServerResponse.symptoms.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
+                    setTimeout(() =>
+                        addServerMessage(symptoms)
+                        , 5000);
 
                     setResultSpeciality(firstServerResponse.speciality)
 
-                    setTimeout(() => setShowMap(true), 1000);
+                    setTimeout(() => setShowMap(true), 5000);
 
                 } else {
                     setTimeout(() =>
@@ -238,7 +240,7 @@ function MemberChat() {
                 if (secondProbability >= 0.7) {
                     setTimeout(() => addServerMessage(secondServerResponse.speciality), 1000);
                     secondServerResponse.symptoms.forEach(symptom => {
-                        setTimeout(() => addServerMessage(symptom), 1000);
+                        setTimeout(() => addServerMessage(symptom), 3000);
                     });
                     setResultSpeciality(secondServerResponse.speciality)
                     setTimeout(() => setShowMap(true), 1000);
@@ -383,7 +385,6 @@ function MemberChat() {
         <div className="container-lg mt-5">
             <div className="row justify-content-center h-100">
                 <div className="col-xl-4 chat">
-                    {/* <div className="col-md-8 col-xl-6 chat"> */}
                     <div className="card">
                         <div className="card-header">
                             <div className="text-center">
@@ -408,20 +409,12 @@ function MemberChat() {
                                             </div>
                                             <div className="msg_cotainer ">
                                                 {message.content}
-                                                <span className="msg_time">
-                                                    {/* {message.timestamp.toString()} */}
-                                                    {/* {moment(message.timestamp).format("YYYY-MM-DD HH:mm:ss")} */}
-                                                </span>
                                             </div>
                                         </>
                                     ) : (
                                         <>
                                             <div className="msg_cotainer_send">
                                                 {message.content}
-                                                <span className="msg_time_send">
-                                                    {/* {moment(message.timestamp).format("YYYY-MM-DD HH:mm:ss")} */}
-                                                    {/* {message.timestamp.toString()} */}
-                                                </span>
                                             </div>
                                             <div className="img_cont_msg">
                                                 <img src={logo} className="rounded-circle user_img_msg" alt="User" />
@@ -459,19 +452,69 @@ function MemberChat() {
                 </div>
                 {showMap && (
                     <div className="col-xl-8 chat">
-                        <div class="card" style={{ maxwidth: "540px", height: "695px" }}>
-                            <div class="row g-0">
-                                <div class={showHospitalReview ? "col-md-8" : "col"}>
-                                    <div class="card-body map_body">
+                        <div className="card" style={{ maxwidth: "540px", height: "695px" }}>
+                            <div className="row g-0">
+                                <div className={showHospitalReview ? "col-md-8" : "col"}>
+                                    <div className="card-body map_body">
                                         <KakaoMap resultSpeciality={resultSpeciality} onMarkerClick={handleMarkerClick} />
                                     </div>
                                 </div>
                                 {showHospitalReview && (
-                                    <div class="col-md-4">
-                                        <div className="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                    <div className="col-md-4">
+                                        <div className="card-body text-center">
+                                            <div className="card" style={{ backgroundColor: "#F5F5F7" }}>
+                                                <div className="card-header">
+                                                    <div className="position-relative d-inline-block">
+                                                        <strong style={{ fontSize: "1.4rem" }}>리뷰</strong>
+                                                        <span className="ms-2 align-baseline badge rounded-pill bg-primary" style={{ fontSize: "0.8rem" }}>
+                                                            {hospitalReview.totalReviews}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <ul className="list-group list-group-flush" >
+                                                    <li className="list-group-item"
+                                                    >
+                                                        별점 평균 <br></br><span style={{ fontSize: '1.2em', fontWeight: 'bold', color: 'orange' }}>{hospitalReview.rating}</span> / 10
+                                                        <div>
+                                                            {[...Array(5)].map((star, index) => {
+                                                                // 별점 평가 로직:
+                                                                // 1. 별점은 0부터 10까지의 값으로, 이를 0~200의 범위로 스케일링한다. (완전히 채워진 별은 100의 값을 가진다.)
+                                                                // 2. 각 별의 기준점에 따라 별 아이콘의 색을 결정한다. (예: 3.5 별점은 첫 3개의 별은 전체 채워짐, 4번째 별은 반쪽만 채워짐, 마지막 별은 비어있음.)
+                                                                const starFullness = (hospitalReview.rating - index * 2) * 100; // 0 to 200 scale (100 being a full star)
+                                                                const starColor = starFullness > 100 ? 'bi-star-fill text-warning' : starFullness > 0 ? 'bi-star-half text-warning' : 'bi-star text-muted';
+                                                                return <i className={`bi ${starColor}`} key={index}></i>
+                                                            })}
+                                                        </div>
+                                                    </li>
+                                                    <li className="list-group-item d-flex align-items-center justify-content-between"
+                                                    >
+                                                        <div className="d-flex align-items-center flex-grow-1 justify-content-end">
+                                                            <div>
+                                                                <i className="bi bi-emoji-laughing"></i>
+                                                            </div>
+                                                            <span className="ms-2">{hospitalReview.positiveReview}</span>
+                                                        </div>
+
+                                                        {/* 회색 세로 줄 */}
+                                                        <div className="border-start mx-3" style={{ height: '24px' }}></div>
+
+                                                        <div className="d-flex align-items-center flex-grow-1">
+                                                            <div>
+                                                                <i className="bi bi-emoji-frown"></i>
+                                                            </div>
+                                                            <span className="ms-2">{hospitalReview.negativeReview}</span>
+                                                        </div>
+
+                                                    </li>
+                                                </ul>
+                                                <div className="card-footer">
+                                                    {hospitalReview.keywords.split(',').map((keyword, index) => (
+                                                        <span className="badge bg-light text-dark rounded-pill ms-2" style={{ padding: "0.8rem 1.2em" }} key={index}>
+                                                            {keyword.trim()}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 )}

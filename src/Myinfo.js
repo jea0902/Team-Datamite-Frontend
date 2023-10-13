@@ -17,6 +17,7 @@ function Myinfo() {
     const { setUserData } = useContext(AuthContext);
 
     useEffect(() => {
+
         async function myinfo() {
             const accessToken = window.localStorage.getItem("AccessToken")
 
@@ -36,11 +37,15 @@ function Myinfo() {
                 setGender(userData.gender)
                 setEmail(userData.email)
 
+                console.log("get")
+
             } catch (error) {
                 console.error('데이터를 가져오는 동안 오류 발생:', error);
             }
         }
         myinfo();
+
+        console.log(step)
     }, [step]);
 
     // 회원정보수정버튼 눌렀을때, 현재 비밀번호 확인창 뜨도록

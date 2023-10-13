@@ -347,9 +347,10 @@ function Signup() {
                   className="form-control input-icon-placeholder1"
                 />
                 <button
-                  className="btn btn-outline-secondary"
+                  className="btn"
                   type="button"
                   onClick={checkId}
+                  style={{ backgroundColor: "#8ec6e6", color:"white" }}
                 >
                   중복체크
                 </button>
@@ -375,25 +376,6 @@ function Signup() {
                 )}
               </div>
             </div>
-            {/* 비밀번호 */}
-            {/* <div className="mb-3">
-                            <label htmlFor="password" className="form-label">비밀번호</label>
-                            <input
-                                onBlur={handlePwBlur} onChange={onChange} value={password} placeholder="비밀번호"
-                                type="password" name="password" id="password" className="form-control input-icon-placeholder2"
-                            />
-                            {pwError && <div style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{pwError}</div>}
-                        </div> */}
-            {/* 비밀번호 확인 */}
-            {/* <div className="mb-3">
-                            <label htmlFor="password2" className="form-label">비밀번호 확인</label>
-                            <input
-                                onBlur={handlePw2Blur} onChange={onChange} value={password2} placeholder="비밀번호 확인"
-                                type="password" name="password2" id="password2" className="form-control input-icon-placeholder2"
-                            />
-                            {pwError2 && <div style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{pwError2}</div>}
-                        </div> */}
-
             {/* 비밀번호, 비밀번호 확인 */}
             <div className="col-md-6 mb-3">
               <label htmlFor="password" className="form-label">
@@ -614,9 +596,9 @@ function Signup() {
             )}
             <div className="d-grid gap-2">
               <button
-                className="btn btn-secondary"
+                className="btn btn-outline-light"
                 type="submit"
-                style={{ backgroundColor: "#34b4fc" }}
+                style={{ backgroundColor: "#8ec6e6", color: "white" }}
               >
                 회원가입
               </button>

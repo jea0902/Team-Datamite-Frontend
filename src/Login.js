@@ -124,9 +124,10 @@ function Login() {
         console.log(error);
         // 에러 처리 코드를 여기에 추가하세요.
       }
-    } else {
-      alert("입력한 정보를 다시 한번 확인해 주세요.");
-    }
+    } 
+    // else {
+    //   alert("입력한 정보를 다시 한번 확인해 주세요.");
+    // }
   }
 
   async function setUserDetails() {
@@ -227,9 +228,9 @@ function Login() {
             </div>
             <div className="d-grid">
               <button
-                className="btn btn-secondary"
+                className="btn btn-outline-light"
                 type="submit"
-                style={{ backgroundColor: "#34b4fc" }}
+                style={{ backgroundColor: "#8ec6e6", color:"white" }}
               >
                 로그인
               </button>
@@ -243,7 +244,7 @@ function Login() {
               </div>
             )}
 
-            <div
+            {/* <div
               style={{
                 textAlign: "center",
                 marginTop: "2vh",
@@ -252,9 +253,9 @@ function Login() {
               }}
             >
               OR
-            </div>
+            </div> */}
 
-            <KakaoLogin />
+            {/* <KakaoLogin /> */}
           </form>
 
           {/* <div className="row g-3 mt-2">

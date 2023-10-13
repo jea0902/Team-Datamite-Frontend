@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useIsLoginState } from "./AuthContext";
 import { AuthContext } from "./AuthContext";
 
@@ -63,7 +63,7 @@ function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/image">
                   사진으로 물어보기
                 </a>
               </li>
@@ -131,9 +131,13 @@ function Navbar() {
                 </ul>
               </div>
             ) : (
-              <a className="btn btn-secondary" href="/login" role="button">
-                Log in
-              </a>
+              // <span class="navbar-text">
+              //   Navbar text with an inline element
+              // </span>
+              <Link to="/login" className="nav-link">Login</Link>
+              // <a className="btn btn-secondary" href="/login" role="button">
+              //   Log in
+              // </a>
             )}
           </div>
         </div>

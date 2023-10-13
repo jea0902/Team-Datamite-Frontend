@@ -13,6 +13,8 @@ function KakaoLogin() {
 
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     // Kakao SDK 딱 한번만 초기화되도록 - 자주 초기화되면 Already initialized 라는 에러가 나옴.
 
@@ -25,6 +27,8 @@ function KakaoLogin() {
     // 1. 인가 코드 추출
     const url = new URL(window.location.href);
     const authCode = url.searchParams.get("code");
+
+    console.log("authCode", authCode);
 
     // 2. 인가 코드가 존재하면 백엔드로 전송
     if (authCode) {
