@@ -1,8 +1,14 @@
-.chatRow {
-  transition: background-color 0.3s;
-  /* 부드러운 전환효과 */
+/* 웹킷 기반 브라우저용 스크롤바 스타일 */
+.modal-content::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
 }
 
-/* .chatRow:hover td {
-  background-color: lightblue !important;
-} */
+.modal-content::-webkit-scrollbar-track {
+  background-color: white; /* 스크롤바의 배경 색상 */
+  border-radius: 20px; /* 스크롤바의 모서리 둥글게 */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #8ec6e6; /* 스크롤바 색상 */
+  border-radius: 20px; /* 스크롤바의 모서리 둥글게 */
+}
