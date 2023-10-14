@@ -56,7 +56,7 @@ export default function MyChatHistory() {
     );
 
   return (
-    <div className="container-sm">
+    <div className="container-sm" style={{ marginTop: "10vh" }}>
       <div
         className="table-responsive d-flex justify-content-center"
         style={{ paddingTop: "1vh" }}

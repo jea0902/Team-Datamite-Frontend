@@ -1,9 +1,38 @@
 @font-face {
-    font-family: 'Seoul Namsan';
-    src: url('../assets/font/SeoulNamsan.ttf') format('truetype');
-    /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
-  }
+  font-family: "BMJUA";
+  src: url("../assets/font/BMJUA_TTF.TTF") format("truetype");
+  /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
+
+  font-family: "NOTOSANS";
+  src: url("../assets/font/NotoSansKR-Light.ttf") format("truetype");
+
+  font-family: "NOTOEXTRA";
+  src: url("../assets/font/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
 
 body {
-    font-family: 'Seoul Namsan';
+  font-family: "BMJUA";
+}
+
+.container-fluid {
+  font-family: "NOTOEXTRA";
+}
+
+.footer {
+  font-family: "NOTOSANS";
+}
+
+/* 웹킷 기반 브라우저용 스크롤바 스타일 */
+body::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: white; /* 스크롤바의 배경 색상 */
+  border-radius: 20px; /* 스크롤바의 모서리 둥글게 */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #8ec6e6; /* 스크롤바 색상 */
+  border-radius: 20px; /* 스크롤바의 모서리 둥글게 */
 }

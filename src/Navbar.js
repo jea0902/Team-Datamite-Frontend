@@ -38,11 +38,28 @@ function Navbar() {
   }
 
   return (
-    <div className="mx-2 mx-auto position-relative z-2 px-3 py-0 shadow-5 ">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div
+      className="container-fluid"
+      style={{
+        padding: 0,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: "10",
+      }}
+    >
+      <nav
+        className="navbar navbar-expand-lg"
+        style={{ backgroundColor: "#fff", opacity: "1" }}
+      >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            Navbar
+          <a
+            className="navbar-brand"
+            href="/"
+            style={{ color: "#8EC6E6", marginLeft: "13vw", fontSize: "30px" }}
+          >
+            토닥토닥
           </a>
           <button
             className="navbar-toggler"
@@ -56,19 +73,25 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+            <ul
+              className="navbar-nav mb-2 mb-lg-0"
+              style={{ marginLeft: "10vw" }}
+            >
+              <li
+                className="nav-item"
+                style={{ marginLeft: "3vw", marginRight: "7vw" }}
+              >
                 <a className="nav-link" aria-current="page" href="/chat">
                   챗봇
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" style={{ marginRight: "7vw" }}>
                 <a className="nav-link" href="/image">
                   사진으로 물어보기
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/qna">
                   문의하기
                 </a>
               </li>
@@ -94,7 +117,10 @@ function Navbar() {
                         </button>) :
                         (<a className="btn btn-secondary" href="/login" role="button">Log in</a>)} */}
             {isLogin ? (
-              <div className="btn-group">
+              <div
+                className="btn-group ms-auto"
+                style={{ marginRight: "18vw" }}
+              >
                 <button
                   type="button"
                   className="btn dropdown-toggle"
@@ -112,10 +138,10 @@ function Navbar() {
                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
                   </svg>
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end">
+                <ul className="dropdown-menu dropdown-menu-end ms-auto">
                   <li>
                     <a className="dropdown-item" href="/mypage">
-                      My page
+                      마이페이지
                     </a>
                   </li>
                   {/* <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -125,7 +151,7 @@ function Navbar() {
                   </li>
                   <li>
                     <a className="dropdown-item" onClick={handleLogout}>
-                      Log out
+                      로그아웃
                     </a>
                   </li>
                 </ul>
@@ -134,7 +160,13 @@ function Navbar() {
               // <span class="navbar-text">
               //   Navbar text with an inline element
               // </span>
-              <Link to="/login" className="nav-link">Login</Link>
+              <Link
+                to="/login"
+                className="nav-link ms-auto"
+                style={{ marginRight: "18vw" }}
+              >
+                로그인
+              </Link>
               // <a className="btn btn-secondary" href="/login" role="button">
               //   Log in
               // </a>

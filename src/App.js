@@ -29,6 +29,9 @@ import KakaoMap from "./KakaoMap/KakaoMap";
 import ImageQuestion from "./ImageQuestion";
 import MyChatHistory from "./MyChatHistory";
 import ChatDetail from "./ChatDetail";
+import QnA from "./QnA";
+import "./css/App.css";
+import Footer from "./Footer";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -45,7 +48,7 @@ function App() {
             <div className="overflow-x-hidden rounded-top-4 pt-2"> */}
           <Navbar />
           {/* <Test/> */}
-          <div className="pt-56 pb-10 pt-lg-56 pb-lg-0 mt-n40 position-relative gradient-bottom-right start-indigo middle-purple end-yellow">
+          <div className="top-container" style={{ marginTop: "150px" }}>
             {/* <div className='container'> */}
             <Routes>
               <Route path="/" element={<Main />} />
@@ -68,9 +71,11 @@ function App() {
               <Route path="/kakaomap" element={<KakaoMap />} />
               <Route path="/image" element={<ImageQuestion />} />
               <Route path="/mychat" element={<MyChatHistory />} />
-              <Route path="mychat/chatId=:chatId" element={<ChatDetail />} />
+              <Route path="/mychat/chatId=:chatId" element={<ChatDetail />} />
+              <Route path="/qna" element={<QnA />} />
             </Routes>
           </div>
+          <Footer />
           {/* </div> */}
           {/* </div>
           </div> */}

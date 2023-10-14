@@ -2,7 +2,7 @@ import React from "react";
 import AuthContext from "./AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Input, Chip } from '@mui/material'
+import { Button, Input, Chip } from "@mui/material";
 
 function ImageQuestion() {
   // const {setLoggedIn} = useContext(AuthContext); // 전역 상태관리
@@ -43,7 +43,7 @@ function ImageQuestion() {
   };
 
   return (
-    <div className="container-lg mt-5">
+    <div className="image-page-container" style={{ width: "100%" }}>
       <div style={{ height: "80vh" }}>
         <div
           style={{
@@ -84,12 +84,12 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
               }}
             >
-              아직은 학습용 데이터가 부족하지만, 아래 파일선택을 클릭하셔서 사진을
-              올려주시면 분석해서 진단명과 병원 추천을 해드리겠습니다.
+              아직은 학습용 데이터가 부족하지만, 아래 파일선택을 클릭하셔서
+              사진을 올려주시면 분석해서 진단해보겠습니다.
             </div>
 
             <div
@@ -127,7 +127,7 @@ function ImageQuestion() {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginTop: "20px" }}
+                style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
               >
                 결과보기
               </Button>
@@ -140,7 +140,6 @@ function ImageQuestion() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              borderRight: "1px solid #ccc",
               padding: "0 16px",
               textAlign: "center",
               height: "100%",
@@ -148,7 +147,13 @@ function ImageQuestion() {
           >
             <h3>진단 결과</h3>
 
-            <div style={{ marginTop: "3vh", marginRight: "30vw" }}>
+            <div
+              style={{
+                marginTop: "4vh",
+                width: "80%",
+                margin: "0 auto 16px auto",
+              }}
+            >
               <h5>진단명 : {diagnosis}</h5>
             </div>
             <div
@@ -159,11 +164,13 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
+                wordWrap: "break-word",
               }}
             >
-              {diagnosis} :
+              {diagnosis}이란? : 이 부분 데이터 받아야 함
+              wqewqwewqeqwe~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             </div>
 
             <div
@@ -174,11 +181,13 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
+                wordWrap: "break-word",
               }}
             >
-              치료방법 및 주의사항 :
+              치료방법 및 주의사항
+              :~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             </div>
           </div>
         </div>
