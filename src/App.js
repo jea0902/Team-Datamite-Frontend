@@ -47,8 +47,8 @@ function App() {
           {/* <div className="p-1 p-lg-2">
             <div className="overflow-x-hidden rounded-top-4 pt-2"> */}
           <Navbar />
-          {/* <Test/> */}
-          <div className="top-container" style={{ marginTop: "150px" }}>
+          <div className="main-contents" style={{ paddingTop: "60px" }}>
+            {/* <Test/> */}
             {/* <div className='container'> */}
             <Routes>
               <Route path="/" element={<Main />} />

@@ -77,10 +77,7 @@ function Navbar() {
               className="navbar-nav mb-2 mb-lg-0"
               style={{ marginLeft: "10vw" }}
             >
-              <li
-                className="nav-item"
-                style={{ marginLeft: "3vw", marginRight: "7vw" }}
-              >
+              <li className="nav-item" style={{ marginRight: "7vw" }}>
                 <a className="nav-link" aria-current="page" href="/chat">
                   챗봇
                 </a>
@@ -90,87 +87,56 @@ function Navbar() {
                   사진으로 물어보기
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" style={{ marginRight: "15vw" }}>
                 <a className="nav-link" href="/qna">
                   문의하기
                 </a>
               </li>
-              {/* <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> */}
-            </ul>
-            {/* {loggedIn ? (<a className="btn btn-secondary" href="/logout" role="button">로그아웃</a>) : (<a className="btn btn-secondary" href="/login" role="button">Log in</a>)} */}
 
-            {/* {loggedIn ?
-                        (<button type="button" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                            </svg>
-                        </button>) :
-                        (<a className="btn btn-secondary" href="/login" role="button">Log in</a>)} */}
-            {isLogin ? (
-              <div
-                className="btn-group ms-auto"
-                style={{ marginRight: "18vw" }}
-              >
-                <button
-                  type="button"
-                  className="btn dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="currentColor"
-                    className="bi bi-person-fill"
-                    viewBox="0 0 16 16"
+              {isLogin ? (
+                <li className="nav-item dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="userMenu"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                   >
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                  </svg>
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end ms-auto">
-                  <li>
-                    <a className="dropdown-item" href="/mypage">
-                      마이페이지
-                    </a>
-                  </li>
-                  {/* <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li> */}
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" onClick={handleLogout}>
-                      로그아웃
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              // <span class="navbar-text">
-              //   Navbar text with an inline element
-              // </span>
-              <Link
-                to="/login"
-                className="nav-link ms-auto"
-                style={{ marginRight: "18vw" }}
-              >
-                로그인
-              </Link>
-              // <a className="btn btn-secondary" href="/login" role="button">
-              //   Log in
-              // </a>
-            )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      className="bi bi-person-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+                    </svg>
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="userMenu">
+                    <li>
+                      <a className="dropdown-item" href="/mypage">
+                        마이페이지
+                      </a>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a className="dropdown-item" onClick={handleLogout}>
+                        로그아웃
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link">
+                    로그인
+                  </Link>
+                </li>
+              )}
+            </ul>
           </div>
         </div>
       </nav>
