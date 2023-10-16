@@ -2,17 +2,17 @@ import React from "react";
 import AuthContext from "./AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Input, Chip } from '@mui/material'
+import { Button, Input, Chip } from "@mui/material";
+import axios from "axios";
 
 function ImageQuestion() {
   // const {setLoggedIn} = useContext(AuthContext); // 전역 상태관리
   const [imagePreview, setImagePreview] = useState(null); // 이미지 미리보기 상태
+  const [selectedFile, setSelectedFile] = useState(null); // 실제 업로드한 파일
+  const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
+  const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
 
-  const diagnosis = "00병";
-
-  // const TestLoggedIn = () => {
-  //     setLoggedIn(prevLoggedIn => !prevLoggedIn);
-  // }
+  const diagnosis = "00병"; // 테스트용
 
   // 파일 업로드 핸들러
   const handleFileUpload = (e) => {
@@ -25,6 +25,7 @@ function ImageQuestion() {
     };
     if (file) {
       reader.readAsDataURL(file);
+      setSelectedFile(file); // 실제 파일 객체를 상태에 저장
     }
 
     console.log(file);
@@ -42,13 +43,42 @@ function ImageQuestion() {
     }
   };
 
+  // FAST API로 이미지 파일을 보내고 결과를 받는 로직.
+  // 이미지와 같은 파일을 업로드할 때 multipart/form-data 형식을 사용하는 것이 일반적. FormData 객체 사용해서 파일 추가
+  const sendImageToFastAPi = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file); // image는 백엔드에서 받을 키
+
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/image_question",
+        formData,
+        {
+          headers: {
+            Authorization: accessToken,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      setDiagnosisResult(response.data); // 서버로부터 받은 응답(진단결과)을 상태에 저장
+    } catch (error) {
+      console.error("이미지 업로드 중 에러", error);
+    }
+  };
+
   return (
-    <div className="container-lg mt-5">
+    <div
+      className="image-page-container"
+      style={{ width: "100%", paddingTop: "60px", paddingBottom: "100px" }}
+    >
       <div style={{ height: "80vh" }}>
         <div
+          className="grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "50% 50%",
+            // 그리드에서 fr은 사용 가능한 공간을 기반으로 크기 조절, %는 정확히 절반 차지하도록 강제
             gap: "16px",
             alignItems: "center",
             height: "100%",
@@ -56,6 +86,7 @@ function ImageQuestion() {
         >
           {/* 왼쪽 그리드 */}
           <div
+            className="leftGrid"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -84,12 +115,12 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
               }}
             >
-              아직은 학습용 데이터가 부족하지만, 아래 파일선택을 클릭하셔서 사진을
-              올려주시면 분석해서 진단명과 병원 추천을 해드리겠습니다.
+              아직은 학습용 데이터가 부족하지만, 아래 파일선택을 클릭하셔서
+              사진을 올려주시면 분석해서 진단해보겠습니다.
             </div>
 
             <div
@@ -127,7 +158,8 @@ function ImageQuestion() {
               <Button
                 variant="contained"
                 color="primary"
-                style={{ marginTop: "20px" }}
+                onClick={() => sendImageToFastAPi(selectedFile)} // 실제 파일 객체를 전달
+                style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
               >
                 결과보기
               </Button>
@@ -136,11 +168,11 @@ function ImageQuestion() {
 
           {/* 오른쪽 그리드*/}
           <div
+            className="rightGrid"
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              borderRight: "1px solid #ccc",
               padding: "0 16px",
               textAlign: "center",
               height: "100%",
@@ -148,8 +180,15 @@ function ImageQuestion() {
           >
             <h3>진단 결과</h3>
 
-            <div style={{ marginTop: "3vh", marginRight: "30vw" }}>
-              <h5>진단명 : {diagnosis}</h5>
+            <div
+              style={{
+                marginTop: "4vh",
+                width: "80%",
+                margin: "0 auto 16px auto",
+              }}
+            >
+              <h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
+              {/* diagnoistName이라는 필드명을 사용했다는 가정 */}
             </div>
             <div
               style={{
@@ -159,11 +198,15 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
+                wordWrap: "break-word",
               }}
             >
-              {diagnosis} :
+              {diagnosisResult?.description || diagnosis}이란? : 이 부분 데이터
+              받아야 함
+              wqewqwewqeqwe~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              {/* description이라는 필드명을 사용했다는 가정 */}
             </div>
 
             <div
@@ -174,11 +217,13 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
-                fontSize: "0.rem",
+                fontSize: "1rem",
                 marginTop: "2vh",
+                wordWrap: "break-word",
               }}
             >
-              치료방법 및 주의사항 :
+              치료방법 및 주의사항 :마찬가지로
+              데이터받아야함.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             </div>
           </div>
         </div>

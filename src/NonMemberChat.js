@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
-import "./Chat.css";
+import "./css/Chat.css"
 import logo from "./datamiteLogo.png";
 
 import KakaoMap from "./KakaoMap/KakaoMap";
@@ -55,6 +55,11 @@ function NonMemberChat() {
     const [messages, setMessages] = useState([]); // 메시지 목록
     const [newMessage, setNewMessage] = useState(''); // 새로운 메시지 입력값
     const [symphtomMessage, setSymphtomMessage] = useState('') // 증상 메시지
+
+    const [saveMessages, setSaveMessages] = useState([]); // db에 저장할 메시지 목록 (증상, 진료과)
+    const [callAddSaveMessage, setCallAddSaveMessage] = useState(false);
+    const [callExit, setCallExit] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false); // 입력 중인지 여부
     const [userMessageIdCounter, setUserMessageIdCounter] = useState(0); // 사용자 메시지 ID 카운터
     const [serverMessageIdCounter, setServerMessageIdCounter] = useState(0); // 서버 메시지 ID 카운터
@@ -97,8 +102,8 @@ function NonMemberChat() {
     // 메시지 목록이 업데이트될 때마다 화면을 가장 아래로 스크롤
     useEffect(() => {
         console.log(messages)
-        console.log("serverID", serverMessageIdCounter)
-        console.log("userID", userMessageIdCounter)
+        // console.log("serverID", serverMessageIdCounter)
+        // console.log("userID", userMessageIdCounter)
 
         async function fetchServer() {
             let firstProbability = 0;
@@ -109,35 +114,39 @@ function NonMemberChat() {
             if (userMessageIdCounter === 2 && serverMessageIdCounter === 3) { // 비회원이 나이와 성별 입력한 후, 증상 입력했을 때
                 const firstServerResponse = await callModelServer();
                 firstProbability = firstServerResponse.top_probability
-                console.log(firstProbability)
+                // console.log(firstProbability)
+
                 setIsLoading(true)
-
                 if (firstProbability >= 0.8) {
-                    setTimeout(() =>
-                        addServerMessage(firstServerResponse.speciality) // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
-                        , 1000);
+                    addServerMessage(firstServerResponse.speciality)
+                    setIsLoading(true)
 
-                    firstServerResponse.symptoms.forEach(symptom => {
-                        setTimeout(() => addServerMessage(symptom), 1000);
-                    });
+                    if (firstServerResponse.diseases.length > 0) {
+                        let disease_top3 = firstServerResponse.diseases.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
+                        addServerMessage(disease_top3)
+                    }
 
                     setResultSpeciality(firstServerResponse.speciality)
 
-                    setTimeout(() => setShowMap(true), 1000);
+                    setCallExit(true);
+
+                    setTimeout(() => setShowMap(true), 5000);
+
                 } else {
                     setTimeout(() =>
                         addServerMessage("상황, 부위, 세부증상 중 빠진 내용이 없는지 다시 한번 확인 후 질문해주세요. 예시) 일주일 전부터 머리가 아프고 콧물이 나요.")
-                        , 3000);
+                        , 1000);
                 }
             }
 
-            // 비회원이 증상을 입력한 후, 서버로부터 답변을 받았는데 예상치 이상치 이상일 때 
-            if (firstProbability >= 0.8 && userMessageIdCounter === 2 && serverMessageIdCounter === 4) { // 비회원이 증상 입력한 후, 서버로부터 답변 받았을 때
-                // chatExit();
-            }
+            // // 비회원이 증상을 입력한 후, 서버로부터 답변을 받았는데 예상치 이상치 이상일 때 
+            // if (firstProbability >= 0.8 && userMessageIdCounter === 2 && serverMessageIdCounter === 4) { // 비회원이 증상 입력한 후, 서버로부터 답변 받았을 때
+            //     // chatExit();
+            // }
 
             // 비회원이 증상을 입력한 후, 서버로부터 답변을 받았는데 예상치 미만이어서, 회원이 다시 증상을 입력했을 때
             if (firstProbability < 0.8 && userMessageIdCounter === 3 && serverMessageIdCounter === 4) { // 비회원이 증상 입력한 후, 서버로부터 답변 받았을 때
+                
                 const secondServerResponse = await callModelServer();
                 let secondProbability = secondServerResponse.top_probability
 
@@ -146,23 +155,43 @@ function NonMemberChat() {
                 setIsLoading(true)
                 if (secondProbability >= 0.7) {
                     setTimeout(() => addServerMessage(secondServerResponse.speciality), 1000);
-                    secondServerResponse.symptoms.forEach(symptom => {
-                        setTimeout(() => addServerMessage(symptom), 1000);
-                    });
+
+                    if (secondServerResponse.diseases.length > 0) {
+                        let disease_top3 = secondServerResponse.diseases.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
+                        addServerMessage(disease_top3)
+                    }
+                    
+                    // secondServerResponse.symptoms.forEach(symptom => {
+                    //     setTimeout(() => addServerMessage(symptom), 1000);
+                    // });
+                    
                     setResultSpeciality(secondServerResponse.speciality)
+
+                    setCallExit(true);
+                    
                     setTimeout(() => setShowMap(true), 1000);
                 } else {
                     setTimeout(() => addServerMessage("증상이 구체적이지 않아 판별이 어렵습니다. 근처 병원에 내원해 상담해보세요."), 1000);
+                    setCallExit(true);
                 }
             }
 
-            if (userMessageIdCounter === 3 && serverMessageIdCounter === 5) {
-                // chatExit();
-            }
+            // if (userMessageIdCounter === 3 && serverMessageIdCounter === 5) {
+            //     // chatExit();
+            // }
         }
         fetchServer();
 
     }, [messages]);
+
+    useEffect(() => {
+
+        if (callExit === true) {
+            chatExit();
+            setCallExit(false);
+        }
+
+    }, [saveMessages])
 
 
     function secondMessage() { // 비회원이 나이와 성별을 입력한 후 실행됨
@@ -191,8 +220,23 @@ function NonMemberChat() {
         try {
 
             const response = await axios.post('http://localhost:8000/process_sympthom', {
-                input_data: `저는 ${sendUserInfo}, ${symphtomMessage}`,
+                // input_data: `저는 ${sendUserInfo}, ${symphtomMessage}`,
+                userInfo: sendUserInfo,
+                input_data: symphtomMessage
             });
+
+            if (response.data.top_probability >= 0.8) {
+                addSaveMessage(symphtomMessage, 'symptom')
+                addSaveMessage(response.data.speciality, 'speciality')
+
+                if (response.data.diseases.length > 0) {
+                    let diseases = response.data.diseases.join(', ')
+                    addSaveMessage(diseases, 'diseases')
+                }
+
+            } else {
+                addSaveMessage(symphtomMessage, 'symptom')
+            }
 
             const severResponse = {
                 speciality: response.data.speciality,
@@ -209,10 +253,29 @@ function NonMemberChat() {
         }
     }
 
+    function addSaveMessage(content_arg, type_arg) {
+
+        console.log(content_arg, type_arg)
+        setSaveMessages((prevMessages) => [
+            ...prevMessages,
+            {
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0,
+                content: content_arg,
+                messageType: type_arg,
+                timestamp: new Date()
+            }
+        ]);
+    }
+
     function addServerMessage(arg) {
         setMessages((prevMessages) => [
             ...prevMessages,
-            { id: serverMessageIdCounter, content: arg, messageType: false, timestamp: new Date() }, // false = 서버
+            {
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0,
+                content: arg,
+                messageType: false,
+                timestamp: new Date()
+            }, // false = 서버
         ]);
 
         // 화면을 가장 아래로 스크롤
@@ -234,11 +297,17 @@ function NonMemberChat() {
         // 사용자의 메시지를 오른쪽에 추가
         setMessages((prevMessages) => [
             ...prevMessages,
-            { id: userMessageIdCounter, content: newMessage, messageType: true, timestamp: new Date() }, //true = 사용자
+            { 
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0, 
+                content: newMessage, 
+                messageType: true, 
+                timestamp: new Date() 
+            }, //true = 사용자
         ]);
 
         if (serverMessageIdCounter === 1) { // 비회원이 나이와 성별을 입력했을 경우 
             setSendUserInfo(newMessage)
+            // addSaveMessage(newMessage, 'user')
         } else {
             setSymphtomMessage(newMessage)
         }
@@ -248,30 +317,29 @@ function NonMemberChat() {
         setUserMessageIdCounter(userMessageIdCounter + 1);
     }
 
-    // async function chatExit() { // 채팅 종료 함수
-    //     console.log(messages)
-    //     // const accessToken = window.localStorage.getItem("AccessToken")
+    async function chatExit() { // 채팅 종료 함수
+        console.log(saveMessages)
 
-    //     try {
-    //         const response = await axios.post(
-    //             'http://localhost:8080/api/chat',
-    //             messages
-    //             ,
-    //             {
-    //                 headers: {
-    //                     Authorization: "",
-    //                     'Content-Type': 'application/json'
-    //                 }
-    //             }
-    //         )
+        try {
+            const response = await axios.post(
+                'http://localhost:8080/api/save/chat',
+                saveMessages
+                ,
+                {
+                    headers: {
+                        Authorization: "",
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
 
-    //         if (response.status === 200) {
-    //             console.log(response.data)
-    //         }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+            if (response.status === 200) {
+                console.log(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // 입력 필드 값 변경 처리 함수
     function handleInputChange(event) {
@@ -314,20 +382,12 @@ function NonMemberChat() {
                                             </div>
                                             <div className="msg_cotainer ">
                                                 {message.content}
-                                                <span className="msg_time">
-                                                    {/* {message.timestamp.toString()} */}
-                                                    {/* {moment(message.timestamp).format("YYYY-MM-DD HH:mm:ss")} */}
-                                                </span>
                                             </div>
                                         </>
                                     ) : (
                                         <>
                                             <div className="msg_cotainer_send">
                                                 {message.content}
-                                                <span className="msg_time_send">
-                                                    {/* {moment(message.timestamp).format("YYYY-MM-DD HH:mm:ss")} */}
-                                                    {/* {message.timestamp.toString()} */}
-                                                </span>
                                             </div>
                                             <div className="img_cont_msg">
                                                 <img src={logo} className="rounded-circle user_img_msg" alt="User" />

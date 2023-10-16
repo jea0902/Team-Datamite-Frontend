@@ -1,9 +1,33 @@
 @font-face {
-    font-family: 'Seoul Namsan';
-    src: url('../assets/font/SeoulNamsan.ttf') format('truetype');
-    /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
-  }
+  font-family: "BMJUA";
+  src: url("../assets/font/BMJUA_TTF.TTF") format("truetype");
+  /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
+}
+
+@font-face {
+  font-family: "NOTOSANS";
+  src: url("../assets/font/NotoSansKR-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NOTOEXTRA";
+  src: url("../assets/font/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
 
 body {
-    font-family: 'Seoul Namsan';
+  font-family: "BMJUA";
+}
+
+.container-fluid {
+  font-family: "NOTOEXTRA";
+}
+
+.footer {
+  font-family: "NOTOSANS";
+}
+
+
+
+.QnA-Box {
+  font-family: "BMJUA";
 }
