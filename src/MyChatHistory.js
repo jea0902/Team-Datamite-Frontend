@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ChatRow from "./ChatRow";
 import "./css/styles.css";
 import moment from "moment"
 import ChatDetailModal from "./ChatDetailModal";
@@ -15,15 +14,12 @@ function MyChatHistory() {
 
     async function getChatHisoty() {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/mypage/chat-history",
-          {
-            headers: {
-              Authorization: accessToken,
-              "Content-Type": "application/json",
-            },
+        const response = await axios.get('http://localhost:8080/api/mypage/chat-history', {
+          headers: {
+            Authorization: accessToken,
+            'Content-Type': 'application/json'
           }
-        );
+        })
 
         if (response.status === 200) {
 
@@ -35,17 +31,13 @@ function MyChatHistory() {
           console.log(response.data);
         }
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
 
     getChatHisoty();
-<<<<<<< HEAD
-  }, []);
-=======
 
   }, [])
->>>>>>> afe50e5d96b4fa9caabb88bf12037e5d29d96c6f
 
   const [currentChatId, setCurrentChatId] = useState(null);
   const [currentChat, setCurrentChat] = useState();
@@ -86,14 +78,7 @@ function MyChatHistory() {
       >
         <table className="table">
           <thead>
-<<<<<<< HEAD
-            <tr
-              className="table-primary"
-              style={{ backgroundColor: "#8ec6e6" }}
-            >
-=======
             <tr>
->>>>>>> afe50e5d96b4fa9caabb88bf12037e5d29d96c6f
               <th
                 className="text-center"
                 scope="col"
@@ -155,52 +140,6 @@ function MyChatHistory() {
       )}
 
     </div>
-
-
-    // <div className="container-sm">
-    //   <div
-    //     className="table-responsive d-flex justify-content-center"
-    //     style={{ paddingTop: "1vh" }}
-    //   >
-    //     <table className="table">
-    //       <thead>
-    //         <tr className="table-primary" style={{ backgroundColor: "#8ec6e6" }}>
-    //           <th
-    //             className="text-center"
-    //             scope="col"
-    //             style={{ padding: "10px 20px" }}
-    //           >
-    //             채팅 번호
-    //           </th>
-    //           <th
-    //             className="text-center"
-    //             scope="col"
-    //             style={{ padding: "10px 20px" }}
-    //           >
-    //             진료과
-    //           </th>
-    //           <th
-    //             className="text-center"
-    //             scope="col"
-    //             style={{ padding: "10px 20px" }}
-    //           >
-    //             채팅한 날짜
-    //           </th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {chats.map((chat, index) => (
-    //           <ChatRow
-    //             key={chat.chatId}
-    //             chat={chat}
-    //             onRowClick={handleRowClick}
-    //             index={index + 1}
-    //           />
-    //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div>
-    // </div>
   );
 }
 export default MyChatHistory;
