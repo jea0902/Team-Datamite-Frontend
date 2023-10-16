@@ -42,11 +42,11 @@ function Navbar() {
       className="container-fluid"
       style={{
         padding: 0,
-        position: "fixed",
+        position: "fixed", // 고정된 위치 Top : 0 - 스크롤을 내려도 상단에 고정되게 만드려고
         top: 0,
         left: 0,
         right: 0,
-        zIndex: "10",
+        zIndex: "10", // 겹치면 Navbar를 젤 위로
       }}
     >
       <nav

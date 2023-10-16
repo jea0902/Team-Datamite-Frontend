@@ -70,7 +70,7 @@ function ImageQuestion() {
   return (
     <div
       className="image-page-container"
-      style={{ width: "100%", paddingTop: "60px" }}
+      style={{ width: "100%", paddingTop: "60px", paddingBottom: "100px" }}
     >
       <div style={{ height: "80vh" }}>
         <div

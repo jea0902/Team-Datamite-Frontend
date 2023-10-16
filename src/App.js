@@ -47,37 +47,61 @@ function App() {
         <BrowserRouter>
           {/* <div className="p-1 p-lg-2">
             <div className="overflow-x-hidden rounded-top-4 pt-2"> */}
-          <Navbar />
-          <div className="main-contents" style={{ paddingTop: "60px" }}>
+          <div
+            className="page-Container"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh", // 브라우저 높이와 같게 설정
+            }}
+          >
+            <div className="Navbar-Container" style={{ flexShrink: 0 }}>
+              {/* flexShrink는 Navbar 높이가 메인컨텐츠에 따라 유연하게 조절되도록 */}
+              <Navbar />
+            </div>
             {/* <Test/> */}
             {/* <div className='container'> */}
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/main" element={<Main />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/find-id" element={<FindId />} />
-              <Route path="/find-id/success" element={<FindIdSuccess />} />
-              <Route path="/find-password" element={<FindPassword />} />
-              <Route
-                path="/find-password/success"
-                element={<FindPasswordSuccess />}
-              />
-              <Route path="/mypage" element={<Mypage />} />
-              {isLogin ? (
-                <Route path="/chat" element={<MemberChat />} />
-              ) : (
-                <Route path="/chat" element={<NonMemberChat />} />
-              )}
-              <Route path="/kakaomap" element={<KakaoMap />} />
-              <Route path="/image" element={<ImageQuestion />} />
-              <Route path="/mychat" element={<MyChatHistory />} />
+            <div
+              className="Main-Contents"
+              style={{
+                flex: 1,
+                // 컨텐츠들이 최대한 이 공간을 차지
+                display: "flex",
+                flexDirection: "column",
+                paddingTop: "50px", // 패딩은 실제 크기를 증가시킴. 마진은 내부를 조절하는 것.
+              }}
+            >
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/main" element={<Main />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/find-id" element={<FindId />} />
+                <Route path="/find-id/success" element={<FindIdSuccess />} />
+                <Route path="/find-password" element={<FindPassword />} />
+                <Route
+                  path="/find-password/success"
+                  element={<FindPasswordSuccess />}
+                />
+                <Route path="/mypage" element={<Mypage />} />
+                {isLogin ? (
+                  <Route path="/chat" element={<MemberChat />} />
+                ) : (
+                  <Route path="/chat" element={<NonMemberChat />} />
+                )}
+                <Route path="/kakaomap" element={<KakaoMap />} />
+                <Route path="/image" element={<ImageQuestion />} />
+                <Route path="/mychat" element={<MyChatHistory />} />
 
-              <Route path="/qna" element={<QnA />} />
-              <Route path="/withdrawal" element={<Withdrawal />} />
-            </Routes>
+                <Route path="/qna" element={<QnA />} />
+                <Route path="/withdrawal" element={<Withdrawal />} />
+              </Routes>
+            </div>
+            <div className="Footer-Container" style={{ flexShrink: 0 }}>
+              {/* flexShrink는 Footer 높이가 내용에 따라 유연하게 조절되도록 */}
+              <Footer />
+            </div>
           </div>
-          <Footer />
           {/* </div> */}
           {/* </div>
           </div> */}
