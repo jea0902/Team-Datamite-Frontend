@@ -8,7 +8,7 @@ import MyChatHistory from "./MyChatHistory";
 function Mypage() {
     // const { loggedIn, setLoggedIn } = useContext(AuthContext);
     return (
-        <div className="container-lg">
+        <div className="container-xl">
             <div className="d-flex align-items-start mt-3">
                 <div className="nav flex-column nav-pills p-2 me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <button className="nav-link active text-nowrap" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">회원정보</button>

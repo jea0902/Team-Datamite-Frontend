@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useRef, useEffect } from 'react';
 import moment from "moment";
-import "./Chat.css"
+import "./css/Chat.css"
 import logo from "./datamiteLogo.png"
 
 import KakaoMap from "./KakaoMap/KakaoMap"
@@ -33,14 +33,14 @@ function MemberChat() {
 
         if (selectedMarkerInfo !== '' && selectedMarkerInfo !== null) {
             async function getHospitalReview() {
-                const response = await axios.post('http://localhost:8080/api/get/hospital_review', {
+                const getResponse = await axios.post('http://localhost:8080/api/get/hospital_review', {
                     hospitalName: selectedMarkerInfo
                 })
 
-                if (response.status === 200) {
-                    console.log(response)
-                    setHospitalReview(response.data)
-                    if (response.data === '') {
+                if (getResponse.status === 200) {
+                    console.log(getResponse)
+                    setHospitalReview(getResponse.data)
+                    if (getResponse.data === '') {
                         setShowHospitalReview(false)
                     } else {
                         setShowHospitalReview(true)
@@ -57,6 +57,10 @@ function MemberChat() {
     const [messages, setMessages] = useState([]); // 메시지 목록
     const [newMessage, setNewMessage] = useState(''); // 새로운 메시지 입력값
     const [symphtomMessage, setSymphtomMessage] = useState('') // 증상 메시지
+
+    const [saveMessages, setSaveMessages] = useState([]); // db에 저장할 메시지 목록 (증상, 진료과)
+    const [callAddSaveMessage, setCallAddSaveMessage] = useState(false);
+    const [callExit, setCallExit] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false); // 입력 중인지 여부
     const [userMessageIdCounter, setUserMessageIdCounter] = useState(0); // 사용자 메시지 ID 카운터
@@ -129,68 +133,12 @@ function MemberChat() {
         return userAge;
     }
 
-    // // 메시지 목록이 업데이트
-    // useEffect(() => {
-    //     console.log(messages)
-    //     console.log("serverID", serverMessageIdCounter)
-    //     console.log("userID", userMessageIdCounter)
-
-    //     async function fetchServer() {
-    //         let firstProbability = 0;
-
-    //         if (userMessageIdCounter === 1 && serverMessageIdCounter === 3) { // 회원이 증상을 입력했을 때
-    //             const firstServerResponse = await callModelServer();
-    //             firstProbability = firstServerResponse.top_probability
-    //             // console.log(firstProbability)
-    //             setIsLoading(true)
-
-    //             if (firstProbability >= 0.8) {
-    //                 setTimeout(() =>
-    //                     addServerMessage(firstServerResponse.speciality) // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
-    //                     , 3000);
-    //             } else {
-    //                 setTimeout(() =>
-    //                     addServerMessage("상황, 부위, 세부증상 중 빠진 내용이 없는지 다시 한번 확인 후 질문해주세요. 예시) 일주일 전부터 머리가 아프고 콧물이 나요.")
-    //                     , 3000);
-    //             }
-    //         }
-
-    //         // 회원이 증상을 입력한 후, 서버로 답변을 받았는데 예상치 이상일 때
-    //         if (firstProbability >= 0.8 && userMessageIdCounter === 1 && serverMessageIdCounter === 4) {
-    //             // chatExit();
-    //         }
-
-    //         // 회원이 증상을 입력한 후, 서버로부터 답변을 받았는데 예상치 미만이서, 회원이 다시 증상을 입력했을 때
-    //         if (firstProbability < 0.8 && userMessageIdCounter === 2 && serverMessageIdCounter === 4) {
-
-    //             const secondServerResponse = await callModelServer();
-    //             let secondProbability = secondServerResponse.top_probability
-
-    //             console.log(secondProbability)
-
-    //             setIsLoading(true)
-    //             if (secondProbability >= 0.7) {
-    //                 setTimeout(() => addServerMessage(secondServerResponse.speciality), 3000);
-    //             } else {
-    //                 setTimeout(() => addServerMessage("증상이 구체적이지 않아 판별이 어렵습니다. 근처 병원에 내원해 상담해보세요."), 3000);
-    //             }
-    //         }
-
-    //         // 회원이 다시 증상을 입력한 후, 서버가 응답한 후 채팅 종료
-    //         if (userMessageIdCounter === 2 && serverMessageIdCounter === 5) {
-    //             // chatExit();
-    //         }
-    //     }
-    //     fetchServer();
-
-    // }, [messages]);
-
 
     // 메시지 목록이 업데이트
     useEffect(() => {
         console.log(messages)
-        console.log("serverID", serverMessageIdCounter)
-        console.log("userID", userMessageIdCounter)
+        // console.log("serverID", serverMessageIdCounter)
+        // console.log("userID", userMessageIdCounter)
 
         async function fetchServer() {
             let firstProbability = 0;
@@ -202,17 +150,19 @@ function MemberChat() {
 
                 setIsLoading(true)
                 if (firstProbability >= 0.8) {
-                    setTimeout(() =>
-                        addServerMessage(firstServerResponse.speciality) // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
-                        , 2000);
+
+                    addServerMessage(firstServerResponse.speciality) // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
 
                     setIsLoading(true)
-                    const symptoms = firstServerResponse.symptoms.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
-                    setTimeout(() =>
-                        addServerMessage(symptoms)
-                        , 5000);
+
+                    if (firstServerResponse.diseases.length > 0) {
+                        let disease_top3 = firstServerResponse.diseases.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
+                        addServerMessage(disease_top3)
+                    }
 
                     setResultSpeciality(firstServerResponse.speciality)
+
+                    setCallExit(true); // 채팅 종료 함수 (chatExit함수를 작동시킬때 save 완료된 다음에 하기 위해서)
 
                     setTimeout(() => setShowMap(true), 5000);
 
@@ -223,10 +173,10 @@ function MemberChat() {
                 }
             }
 
-            // 회원이 증상을 입력한 후, 서버로 답변을 받았는데 예상치 이상일 때 채팅 종료
-            if (firstProbability >= 0.8 && userMessageIdCounter === 1 && serverMessageIdCounter === 4) {
-                // chatExit();
-            }
+            // // 회원이 증상을 입력한 후, 서버로 답변을 받았는데 예상치 이상일 때 채팅 종료
+            // if (firstProbability >= 0.8 && userMessageIdCounter === 1 && serverMessageIdCounter === 5) {
+            //     chatExit();
+            // }
 
             // 회원이 증상을 입력한 후, 서버로부터 답변을 받았는데 예상치 미만이서, 회원이 다시 증상을 입력했을 때
             if (firstProbability < 0.8 && userMessageIdCounter === 2 && serverMessageIdCounter === 4) {
@@ -237,51 +187,47 @@ function MemberChat() {
                 console.log(secondProbability)
 
                 setIsLoading(true)
-                if (secondProbability >= 0.7) {
+                if (secondProbability >= 0.8) {
                     setTimeout(() => addServerMessage(secondServerResponse.speciality), 1000);
-                    secondServerResponse.symptoms.forEach(symptom => {
-                        setTimeout(() => addServerMessage(symptom), 3000);
-                    });
+
+                    if (secondServerResponse.diseases.length > 0) {
+                        let disease_top3 = secondServerResponse.diseases.join(', '); // 배열의 항목을 쉼표로 구분한 문자열로 결합
+                        addServerMessage(disease_top3)
+                    }
+
+                    // secondServerResponse.symptoms.forEach(symptom => {
+                    //     setTimeout(() => addServerMessage(symptom), 3000);
+                    // });
+
                     setResultSpeciality(secondServerResponse.speciality)
+
+                    setCallExit(true); // 채팅 종료 함수
+
                     setTimeout(() => setShowMap(true), 1000);
                 } else {
                     setTimeout(() => addServerMessage("증상이 구체적이지 않아 판별이 어렵습니다. 근처 병원에 내원해 상담해보세요."), 1000);
+                    setCallExit(true); // 채팅 종료 함수
                 }
             }
 
-            // 회원이 다시 증상을 입력한 후, 서버가 응답한 후 채팅 종료
-            if (userMessageIdCounter === 2 && serverMessageIdCounter === 5) {
-                // chatExit();
-            }
+            // // 회원이 다시 증상을 입력한 후, 서버가 응답한 후 채팅 종료
+            // if (userMessageIdCounter === 2 && serverMessageIdCounter === 5) {
+            //     chatExit();
+            // }
         }
+
         fetchServer();
 
     }, [messages]);
 
+    useEffect(() => {
 
-    // async function callModelServer() {
-    //     // "입력 중..." 표시 활성화
-    //     setIsLoading(true);
+        if (callExit === true) {
+            chatExit();
+            setCallExit(false);
+        }
 
-    //     try {
-
-    //         const response = await axios.post('http://localhost:8000/process_sympthom', {
-    //             input_data: `저는 ${sendUserInfo}, ${symphtomMessage}`,
-    //         });
-
-    //         const severResponse = {
-    //             speciality: response.data.speciality,
-    //             top_probability: response.data.top_probability
-    //         };
-
-    //         return severResponse;
-
-    //     } catch (error) {
-
-    //         console.log(error);
-
-    //     }
-    // }
+    }, [saveMessages])
 
     async function callModelServer() {
         // "입력 중..." 표시 활성화
@@ -290,13 +236,28 @@ function MemberChat() {
         try {
 
             const response = await axios.post('http://localhost:8000/process_sympthom', {
-                input_data: `저는 ${sendUserInfo}, ${symphtomMessage}`,
+                // input_data: `저는 ${sendUserInfo}, ${symphtomMessage}`,
+                userInfo: sendUserInfo,
+                input_data: symphtomMessage
             });
+
+            if (response.data.top_probability >= 0.8) {
+                addSaveMessage(symphtomMessage, 'symptom')
+                addSaveMessage(response.data.speciality, 'speciality')
+
+                if (response.data.diseases.length > 0) {
+                    let diseases = response.data.diseases.join(', ')
+                    addSaveMessage(diseases, 'diseases')
+                }
+
+            } else {
+                addSaveMessage(symphtomMessage, 'symptom')
+            }
 
             const severResponse = {
                 speciality: response.data.speciality,
                 top_probability: response.data.top_probability,
-                symptoms: response.data.symptoms
+                diseases: response.data.diseases
             };
 
             return severResponse;
@@ -308,10 +269,30 @@ function MemberChat() {
         }
     }
 
+    function addSaveMessage(content_arg, type_arg) {
+
+        console.log(content_arg, type_arg)
+        setSaveMessages((prevMessages) => [
+            ...prevMessages,
+            {
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0,
+                content: content_arg,
+                messageType: type_arg,
+                timestamp: new Date()
+            }
+        ]);
+    }
+
     function addServerMessage(arg) {
+        console.log(serverMessageIdCounter)
         setMessages((prevMessages) => [
             ...prevMessages,
-            { id: serverMessageIdCounter, content: arg, messageType: false, timestamp: new Date() }, // false = 서버
+            {
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0,
+                content: arg,
+                messageType: false,
+                timestamp: new Date()
+            }, // false = 서버
         ]);
 
         // 화면을 가장 아래로 스크롤
@@ -333,7 +314,12 @@ function MemberChat() {
         // 사용자의 메시지를 오른쪽에 추가
         setMessages((prevMessages) => [
             ...prevMessages,
-            { id: userMessageIdCounter, content: newMessage, messageType: true, timestamp: new Date() }, //true = 사용자
+            {
+                id: prevMessages.length > 0 ? prevMessages[prevMessages.length - 1].id + 1 : 0,
+                content: newMessage,
+                messageType: true,
+                timestamp: new Date()
+            }, //true = 사용자
         ]);
 
         setSymphtomMessage(newMessage)
@@ -344,30 +330,30 @@ function MemberChat() {
     }
 
 
-    // async function chatExit() { // 채팅 종료 함수
-    //     console.log(messages)
-    //     const accessToken = window.localStorage.getItem("AccessToken")
+    async function chatExit() { // 채팅 종료 함수
+        console.log(saveMessages)
+        const accessToken = window.localStorage.getItem("AccessToken")
 
-    //     try {
-    //         const response = await axios.post(
-    //         'http://localhost:8080/api/save/chat', 
-    //         messages
-    //         ,  
-    //         {
-    //             headers: {
-    //                 Authorization: accessToken,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         }
-    //     )
+        try {
+            const response = await axios.post(
+                'http://localhost:8080/api/save/chat',
+                saveMessages
+                ,
+                {
+                    headers: {
+                        Authorization: accessToken,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
 
-    //     if (response.status === 200) {
-    //         console.log(response.data)
-    //     }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+            if (response.status === 200) {
+                console.log(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // 입력 필드 값 변경 처리 함수
     function handleInputChange(event) {

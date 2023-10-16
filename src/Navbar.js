@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useIsLoginState } from "./AuthContext";
-import { AuthContext } from "./AuthContext";
+import { useIsLoginState, useUserData, AuthContext } from "./AuthContext";
 
 function Navbar() {
   const isLogin = useIsLoginState();
   const { setIsLogin } = useContext(AuthContext);
+  const userData = useUserData();
   const navigate = useNavigate();
 
   async function handleLogout(event) {
@@ -38,107 +38,83 @@ function Navbar() {
   }
 
   return (
-    <div className="mx-2 mx-auto position-relative z-2 px-3 py-0 shadow-5 ">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            Navbar
+    <div
+      className="container-fluid"
+      style={{
+        padding: 0,
+        position: "fixed", // 고정된 위치 Top : 0 - 스크롤을 내려도 상단에 고정되게 만드려고
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: "10", // 겹치면 Navbar를 젤 위로
+      }}
+    >
+      <nav
+        className="navbar navbar-expand-lg"
+        style={{ backgroundColor: "#fff", opacity: "1" }}
+      >
+        <div className="container-sm">
+          <a
+            className="navbar-brand"
+            href="/"
+            style={{ color: "#8EC6E6", fontSize: "25px" }}
+          >
+            토닥토닥
           </a>
           <button
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/chat">
-                  챗봇
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/image">
-                  사진으로 물어보기
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  문의하기
-                </a>
-              </li>
-              {/* <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> */}
-            </ul>
-            {/* {loggedIn ? (<a className="btn btn-secondary" href="/logout" role="button">로그아웃</a>) : (<a className="btn btn-secondary" href="/login" role="button">Log in</a>)} */}
+          <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-sm-evenly flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/chat">챗봇</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/ask/image"
+                  // style={{marginRight:"100px", marginLeft:"100px"}}
+                  >사진으로 물어보기</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/ask/image">문의하기</a>
+                </li>
+              </ul>
 
-            {/* {loggedIn ?
-                        (<button type="button" class="btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                            </svg>
-                        </button>) :
-                        (<a className="btn btn-secondary" href="/login" role="button">Log in</a>)} */}
-            {isLogin ? (
-              <div className="btn-group">
-                <button
-                  type="button"
-                  className="btn dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    fill="currentColor"
-                    className="bi bi-person-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                  </svg>
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a className="dropdown-item" href="/mypage">
-                      My page
+              {isLogin && userData.name !== '' ? (
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-person-fill"></i> {userData.name}
                     </a>
-                  </li>
-                  {/* <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li> */}
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" onClick={handleLogout}>
-                      Log out
-                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i>  Profile</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-chat-dots"></i>  Chat History</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up"></i>  Dashboard</a></li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li><a class="dropdown-item" onClick={handleLogout}><i class="bi bi-power" style={{fontWeight: 'bold'}}></i> Log out</a></li>
+                    </ul>
                   </li>
                 </ul>
-              </div>
-            ) : (
-              // <span class="navbar-text">
-              //   Navbar text with an inline element
-              // </span>
-              <Link to="/login" className="nav-link">Login</Link>
-              // <a className="btn btn-secondary" href="/login" role="button">
-              //   Log in
-              // </a>
-            )}
+              ) : (
+                <div class="d-flex">
+                  <div class="p-2 text-center">
+                    <a class="dropdown-item" href="/login">로그인</a></div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
