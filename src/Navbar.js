@@ -57,7 +57,7 @@ function Navbar() {
           <a
             className="navbar-brand"
             href="/"
-            style={{ color: "#8EC6E6", marginLeft: "13vw", fontSize: "30px" }}
+            style={{ color: "#8EC6E6", marginLeft: "13vw", fontSize: "25px" }}
           >
             토닥토닥
           </a>

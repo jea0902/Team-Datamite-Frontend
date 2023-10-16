@@ -350,7 +350,7 @@ function Signup() {
                   className="btn"
                   type="button"
                   onClick={checkId}
-                  style={{ backgroundColor: "#8ec6e6", color:"white" }}
+                  style={{ backgroundColor: "#8ec6e6", color: "white" }}
                 >
                   중복체크
                 </button>
@@ -571,7 +571,7 @@ function Signup() {
                   id="emailDomain"
                   name="emailDomain"
                 >
-                  <option value="">Choose...</option>
+                  <option value="">선택</option>
                   <option value="naver.com">naver.com</option>
                   <option value="gmail.com">gmail.com</option>
                   <option value="daum.net">daum.net</option>

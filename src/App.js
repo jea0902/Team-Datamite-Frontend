@@ -32,6 +32,7 @@ import ChatDetail from "./ChatDetail";
 import QnA from "./QnA";
 import "./css/App.css";
 import Footer from "./Footer";
+import Withdrawal from "./Withdrawal";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -71,8 +72,9 @@ function App() {
               <Route path="/kakaomap" element={<KakaoMap />} />
               <Route path="/image" element={<ImageQuestion />} />
               <Route path="/mychat" element={<MyChatHistory />} />
-              <Route path="/mychat/chatId=:chatId" element={<ChatDetail />} />
+
               <Route path="/qna" element={<QnA />} />
+              <Route path="/withdrawal" element={<Withdrawal />} />
             </Routes>
           </div>
           <Footer />
