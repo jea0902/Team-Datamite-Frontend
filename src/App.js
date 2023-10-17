@@ -24,11 +24,10 @@ import MemberChat from "./MemberChat";
 import KakaoMap from "./KakaoMap/KakaoMap";
 import ImageQuestion from "./ImageQuestion";
 import MyChatHistory from "./MyChatHistory";
-import Withdrawal from "./Withdrawal"
-import QnA from "./QnA"
+import Withdrawal from "./Withdrawal";
+import QnA from "./QnA";
 
-
-import Footer from "./Footer"
+import Footer from "./Footer";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -86,14 +85,17 @@ function App() {
                   <Route path="/chat" element={<NonMemberChat />} />
                 )}
                 <Route path="/kakaomap" element={<KakaoMap />} />
-                <Route path="/image" element={<ImageQuestion />} />
+                <Route path="/ask-image" element={<ImageQuestion />} />
                 <Route path="/mychat" element={<MyChatHistory />} />
 
                 <Route path="/qna" element={<QnA />} />
                 <Route path="/withdrawal" element={<Withdrawal />} />
               </Routes>
             </div>
-            <div className="Footer-Container" style={{ flexShrink: 0 }}>
+            <div
+              className="Footer-Container"
+              style={{ flexShrink: 0, paddingTop: "50px" }}
+            >
               {/* flexShrink는 Footer 높이가 내용에 따라 유연하게 조절되도록 */}
               <Footer />
             </div>

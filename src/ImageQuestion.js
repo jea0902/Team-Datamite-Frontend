@@ -12,6 +12,8 @@ function ImageQuestion() {
   const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
   const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
 
+  const [flipped, setFlipped] = useState(false); // 카드가 뒤집혔는지 상태변수
+
   const diagnosis = "00병"; // 테스트용
 
   // 파일 업로드 핸들러
@@ -62,7 +64,11 @@ function ImageQuestion() {
       );
       console.log(response.data);
       setDiagnosisResult(response.data); // 서버로부터 받은 응답(진단결과)을 상태에 저장
+
+      // API 호출이 성공저긍로 완료되면 카드를 뒤집는다.
+      setFlipped(true);
     } catch (error) {
+      setFlipped(true); // 이 부분은 프론트엔드 테스트용으로 추가한 부분이므로 복붙받으면 지우자
       console.error("이미지 업로드 중 에러", error);
     }
   };
@@ -70,31 +76,45 @@ function ImageQuestion() {
   return (
     <div
       className="image-page-container"
-      style={{ width: "100%", paddingTop: "60px", paddingBottom: "100px" }}
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "100%",
+        paddingTop: "60px",
+        paddingBottom: "300px",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <div style={{ height: "80vh" }}>
+      <div className="heightFixed" style={{ height: "80vh" }}>
         <div
-          className="grid"
+          className="card"
+          // onClick={() => setFlipped(!flipped)}
+          // 테스트용 온클릭
           style={{
-            display: "grid",
-            gridTemplateColumns: "50% 50%",
-            // 그리드에서 fr은 사용 가능한 공간을 기반으로 크기 조절, %는 정확히 절반 차지하도록 강제
-            gap: "16px",
-            alignItems: "center",
-            height: "100%",
+            perspective: "1500px",
+            width: "600px",
+            height: "600px",
+            position: "relative",
           }}
         >
-          {/* 왼쪽 그리드 */}
+          {/* 카드 앞면 */}
           <div
-            className="leftGrid"
+            className="card-front"
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              borderRight: "1px solid #ccc",
               padding: "0 16px",
               textAlign: "center",
+              width: "100%",
               height: "100%",
+              position: "absolute", // 카드 앞면과 뒷면 겹치려고 absolute 사용
+              backfaceVisibility: "hidden",
+              opacity: flipped ? 0 : 1, // flipped 상태에 따른 투명도 변경
+              transition: "opacity 0.5s, transform 0.4s",
+              transform: flipped ? "translate(-30%,-30%)" : "translate(0,0)", // 왼쪽 상단으로 이동
+              zIndex: "10", // 이거 없으면 뒷면 카드가 위로 온다.
             }}
           >
             <div>
@@ -112,7 +132,6 @@ function ImageQuestion() {
                 width: "80%",
                 margin: "0 auto 16px auto",
                 padding: "16px",
-                border: "1px solid #ccc",
                 borderRadius: "4px",
                 backgroundColor: "#f5f5f5",
                 fontSize: "1rem",
@@ -131,11 +150,22 @@ function ImageQuestion() {
                 marginBottom: "16px",
               }}
             >
-              <Input
-                type="file"
-                onChange={handleFileUpload}
-                style={{ width: "80%", margin: "16px 0", display: "block" }}
-              />
+              <div style={{ width: "80%", margin: "16px 0" }}>
+                {/* Input은 세련된 디자인을 제공하지 않아서 숨겨진 Input + Label 트릭 사용 */}
+                <Input
+                  type="file"
+                  id="file-input"
+                  // 여기 있는 id와 아래에 있는 label의 htmlFor가 같은 게 핵심.
+                  onChange={handleFileUpload}
+                  style={{ width: "80%", margin: "16px 0", display: "none" }}
+                />
+                {/* 사용자에게 보여줄 label */}
+                <label htmlFor="file-input">
+                  <Button variant="outlined" component="span">
+                    파일 업로드 버튼 클릭해주세요!
+                  </Button>
+                </label>
+              </div>
             </div>
 
             <div
@@ -152,13 +182,20 @@ function ImageQuestion() {
                 border: "1px solid #ccc",
                 boxSizing: "border-box",
               }}
-            ></div>
+            >
+              <br />
+              이곳에 드래그 하셔도 파일 업로드가 가능합니다
+            </div>
 
             <div>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => sendImageToFastAPi(selectedFile)} // 실제 파일 객체를 전달
+                onClick={() => {
+                  // 버튼을 클릭하면 이미지를 전송하고
+                  // 결과를 받아오면 자동으로 카드가 페이드 아웃.
+                  sendImageToFastAPi(selectedFile);
+                }} // 실제 파일 객체를 전달
                 style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
               >
                 결과보기
@@ -166,16 +203,21 @@ function ImageQuestion() {
             </div>
           </div>
 
-          {/* 오른쪽 그리드*/}
+          {/* 카드 뒷면*/}
           <div
-            className="rightGrid"
+            className="card-back"
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               padding: "0 16px",
               textAlign: "center",
+              width: "100%",
               height: "100%",
+              position: "absolute",
+              backfaceVisibility: "hidden",
+              opacity: flipped ? 1 : 0, // flipped 상태에 따른 투명도 변경
+              transition: "opacity 0.5s",
             }}
           >
             <h3>진단 결과</h3>
@@ -203,8 +245,8 @@ function ImageQuestion() {
                 wordWrap: "break-word",
               }}
             >
-              {diagnosisResult?.description || diagnosis}이란? : 이 부분 데이터
-              받아야 함
+              {diagnosisResult?.description || diagnosis}이란? : 이 부분 그냥
+              네이버 크롤링
               wqewqwewqeqwe~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               {/* description이라는 필드명을 사용했다는 가정 */}
             </div>
@@ -222,7 +264,7 @@ function ImageQuestion() {
                 wordWrap: "break-word",
               }}
             >
-              치료방법 및 주의사항 :마찬가지로
+              치료방법 및 주의사항 : 네이버 크롤링해서 가져올 것
               데이터받아야함.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             </div>
           </div>
