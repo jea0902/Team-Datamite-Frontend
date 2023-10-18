@@ -32,10 +32,10 @@ export default function QnA() {
           magin: "0 auto",
           textAlign: "center",
           color: "white",
-          fontSize: "20px",
+          fontSize: "25px",
         }} // 0은 상하 마진, auto는 좌우 마진 -> 수평 중앙에 배치>
       >
-        <span style={{ fontSize: "25px" }}>토닥토닥</span>에 궁금한 점이
+        <span style={{ fontSize: "28px" }}>토닥토닥</span>에 궁금한 점이
         있으신가요?
         <br />
         <br />

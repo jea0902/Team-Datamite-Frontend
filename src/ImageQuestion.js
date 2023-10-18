@@ -1,7 +1,4 @@
-import React from "react";
-import AuthContext from "./AuthContext";
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { Button, Input, Chip } from "@mui/material";
 import axios from "axios";
 
@@ -78,195 +75,199 @@ function ImageQuestion() {
       className="image-page-container"
       style={{
         display: "flex",
-        width: "100%",
-        height: "100%",
-        paddingTop: "60px",
-        paddingBottom: "300px",
+        width: "70vw",
+        margin: "auto",
+        height: "calc(100vh - 67px - 183px)", // 전체 뷰포트 높이에서 Navbar와 Footer의 높이를 뺌
         alignItems: "center",
         justifyContent: "center",
+        marginTop: "50px",
+        marginBottom: "300px",
+        marginTop: "100px",
       }}
     >
-      <div className="heightFixed" style={{ height: "80vh" }}>
+      <div
+        className="card"
+        style={{
+          display: "flex",
+          justifyContent: "cneter",
+          alignItems: "center",
+          perspective: "1500px",
+          width: "100%",
+          height: "100%",
+          position: "relative",
+          border: "none",
+          transformStyle: "preserve-3d",
+          transition: "transform 0.5s",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
+      >
+        {/* 카드 앞면 */}
         <div
-          className="card"
-          // onClick={() => setFlipped(!flipped)}
-          // 테스트용 온클릭
+          className="card-front"
           style={{
-            perspective: "1500px",
-            width: "600px",
-            height: "600px",
-            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "0 16px",
+            textAlign: "center",
+            width: "100%",
+            height: "100%",
+            position: "absolute", // 카드 앞면과 뒷면 겹치려고 absolute 사용
+            backfaceVisibility: "hidden",
+            opacity: flipped ? 0 : 1, // flipped 상태에 따른 투명도 변경
+            transition: "opacity 0.5s, transform 0.6s",
+            transform: "rotateY(0deg)",
+            zIndex: flipped ? 10 : 1, // 이거 없으면 뒷면 카드가 위로 온다.
+            opacity: flipped ? 0 : 1,
           }}
         >
-          {/* 카드 앞면 */}
+          <div>
+            <h3>이미지 업로드</h3>
+            <Chip
+              label="Beta"
+              size="small"
+              variant="outlined"
+              style={{ width: "50px" }}
+            />
+          </div>
+
           <div
-            className="card-front"
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "0 16px",
-              textAlign: "center",
-              width: "100%",
-              height: "100%",
-              position: "absolute", // 카드 앞면과 뒷면 겹치려고 absolute 사용
-              backfaceVisibility: "hidden",
-              opacity: flipped ? 0 : 1, // flipped 상태에 따른 투명도 변경
-              transition: "opacity 0.5s, transform 0.4s",
-              transform: flipped ? "translate(-30%,-30%)" : "translate(0,0)", // 왼쪽 상단으로 이동
-              zIndex: "10", // 이거 없으면 뒷면 카드가 위로 온다.
+              width: "80%",
+              margin: "0 auto 16px auto",
+              padding: "16px",
+              borderRadius: "4px",
+              backgroundColor: "#f5f5f5",
+              fontSize: "1.3rem",
+              marginTop: "2vh",
             }}
           >
-            <div>
-              <h3>이미지 업로드</h3>
-              <Chip
-                label="Beta"
-                size="small"
-                variant="outlined"
-                style={{ width: "50px" }}
-              />
-            </div>
+            아직은 학습용 데이터가 부족하지만, <br />
+            아래 파일선택을 클릭하셔서 사진을 올려주시면 분석해서
+            진단해보겠습니다.
+          </div>
 
-            <div
-              style={{
-                width: "80%",
-                margin: "0 auto 16px auto",
-                padding: "16px",
-                borderRadius: "4px",
-                backgroundColor: "#f5f5f5",
-                fontSize: "1rem",
-                marginTop: "2vh",
-              }}
-            >
-              아직은 학습용 데이터가 부족하지만, 아래 파일선택을 클릭하셔서
-              사진을 올려주시면 분석해서 진단해보겠습니다.
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "16px",
-              }}
-            >
-              <div style={{ width: "80%", margin: "16px 0" }}>
-                {/* Input은 세련된 디자인을 제공하지 않아서 숨겨진 Input + Label 트릭 사용 */}
-                <Input
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "16px",
+            }}
+          >
+            <div style={{ width: "80%", margin: "16px 0" }}>
+              <div class="input-group mb-3">
+                <input
                   type="file"
-                  id="file-input"
-                  // 여기 있는 id와 아래에 있는 label의 htmlFor가 같은 게 핵심.
+                  class="form-control"
+                  id="inputGroupFile"
                   onChange={handleFileUpload}
-                  style={{ width: "80%", margin: "16px 0", display: "none" }}
                 />
-                {/* 사용자에게 보여줄 label */}
-                <label htmlFor="file-input">
-                  <Button variant="outlined" component="span">
-                    파일 업로드 버튼 클릭해주세요!
-                  </Button>
-                </label>
               </div>
-            </div>
-
-            <div
-              onDragOver={onDragOver}
-              onDrop={onDrop}
-              style={{
-                width: "80%",
-                height: "30vh",
-                margin: "0 auto 16px auto",
-                marginBottom: "16px",
-                background: imagePreview
-                  ? `url(${imagePreview}) no-repeat center/cover`
-                  : "#ffffff",
-                border: "1px solid #ccc",
-                boxSizing: "border-box",
-              }}
-            >
-              <br />
-              이곳에 드래그 하셔도 파일 업로드가 가능합니다
-            </div>
-
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  // 버튼을 클릭하면 이미지를 전송하고
-                  // 결과를 받아오면 자동으로 카드가 페이드 아웃.
-                  sendImageToFastAPi(selectedFile);
-                }} // 실제 파일 객체를 전달
-                style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
-              >
-                결과보기
-              </Button>
             </div>
           </div>
 
-          {/* 카드 뒷면*/}
           <div
-            className="card-back"
+            onDragOver={onDragOver}
+            onDrop={onDrop}
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "0 16px",
-              textAlign: "center",
-              width: "100%",
-              height: "100%",
-              position: "absolute",
-              backfaceVisibility: "hidden",
-              opacity: flipped ? 1 : 0, // flipped 상태에 따른 투명도 변경
-              transition: "opacity 0.5s",
+              width: "80%",
+              height: "30vh",
+              margin: "0 auto 16px auto",
+              marginBottom: "16px",
+              background: imagePreview
+                ? `url(${imagePreview}) no-repeat center/cover`
+                : "#ffffff",
+              border: "1px solid #ccc",
+              boxSizing: "border-box",
             }}
           >
+            <br />
+            이곳에 드래그 하셔도 파일 업로드가 가능해요!
+          </div>
+
+          <div style={{ paddingBottom: "20px" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                // 버튼을 클릭하면 이미지를 전송하고
+                // 결과를 받아오면 자동으로 카드가 페이드 아웃.
+                sendImageToFastAPi(selectedFile);
+              }} // 실제 파일 객체를 전달
+              style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
+            >
+              결과보기
+            </Button>
+          </div>
+        </div>
+
+        {/* 카드 뒷면*/}
+        <div
+          className="card-back"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            padding: "0 16px",
+            textAlign: "center",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            backfaceVisibility: "hidden",
+            opacity: flipped ? 1 : 0, // flipped 상태에 따른 투명도 변경
+            transition: "opacity 0.5s",
+            transform: "rotateY(180deg)",
+            opacity: flipped ? 1 : 0,
+            zIndex: flipped ? 10 : 5,
+          }}
+        >
+          <div style={{ paddingTop: "20px" }}>
             <h3>진단 결과</h3>
+          </div>
+          <div
+            style={{
+              marginTop: "2vh",
+              width: "80%",
+              margin: "0 auto 16px auto",
+            }}
+          >
+            <h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
+            {/* diagnoistName이라는 필드명을 사용했다는 가정 */}
+          </div>
+          <div
+            style={{
+              width: "80%",
+              margin: "0 auto 16px auto",
+              padding: "16px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              backgroundColor: "#f5f5f5",
+              fontSize: "1.3rem",
+              marginTop: "2vh",
+              wordWrap: "break-word",
+            }}
+          >
+            {diagnosisResult?.description || diagnosis}이란? : 이 부분 그냥
+            네이버 크롤링 wqewqwewqeqwe~~~~~~~~~
+            {/* description이라는 필드명을 사용했다는 가정 */}
+          </div>
 
-            <div
-              style={{
-                marginTop: "4vh",
-                width: "80%",
-                margin: "0 auto 16px auto",
-              }}
-            >
-              <h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
-              {/* diagnoistName이라는 필드명을 사용했다는 가정 */}
-            </div>
-            <div
-              style={{
-                width: "80%",
-                margin: "0 auto 16px auto",
-                padding: "16px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                backgroundColor: "#f5f5f5",
-                fontSize: "1rem",
-                marginTop: "2vh",
-                wordWrap: "break-word",
-              }}
-            >
-              {diagnosisResult?.description || diagnosis}이란? : 이 부분 그냥
-              네이버 크롤링
-              wqewqwewqeqwe~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              {/* description이라는 필드명을 사용했다는 가정 */}
-            </div>
-
-            <div
-              style={{
-                width: "80%",
-                margin: "0 auto 16px auto",
-                padding: "16px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                backgroundColor: "#f5f5f5",
-                fontSize: "1rem",
-                marginTop: "2vh",
-                wordWrap: "break-word",
-              }}
-            >
-              치료방법 및 주의사항 : 네이버 크롤링해서 가져올 것
-              데이터받아야함.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            </div>
+          <div
+            style={{
+              width: "80%",
+              margin: "0 auto 16px auto",
+              padding: "16px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              backgroundColor: "#f5f5f5",
+              fontSize: "1.3rem",
+              marginTop: "2vh",
+              wordWrap: "break-word",
+            }}
+          >
+            치료방법 및 주의사항 : 네이버 크롤링해서 가져올 것
+            데이터받아야함.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           </div>
         </div>
       </div>

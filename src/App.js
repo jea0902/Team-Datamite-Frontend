@@ -48,6 +48,7 @@ function App() {
               display: "flex",
               flexDirection: "column",
               minHeight: "100vh", // 브라우저 높이와 같게 설정
+              overflowY: "auto", // Main-contents 내용이 넘칠 경우 아래로 스크롤 가능하게
             }}
           >
             <div className="Navbar-Container" style={{ flexShrink: 0 }}>
@@ -60,7 +61,7 @@ function App() {
               className="Main-Contents"
               style={{
                 flex: 1,
-                // 컨텐츠들이 최대한 이 공간을 차지
+                // Navbar와 Footer의 높이를 뺀 나머지 전부
                 display: "flex",
                 flexDirection: "column",
                 paddingTop: "50px", // 패딩은 실제 크기를 증가시킴. 마진은 내부를 조절하는 것.
@@ -92,10 +93,7 @@ function App() {
                 <Route path="/withdrawal" element={<Withdrawal />} />
               </Routes>
             </div>
-            <div
-              className="Footer-Container"
-              style={{ flexShrink: 0, paddingTop: "50px" }}
-            >
+            <div className="Footer-Container" style={{ flexShrink: 0 }}>
               {/* flexShrink는 Footer 높이가 내용에 따라 유연하게 조절되도록 */}
               <Footer />
             </div>
