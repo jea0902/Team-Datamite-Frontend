@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button, Input, Chip } from "@mui/material";
 import axios from "axios";
+import { useEffect } from "react";
+import 토닥 from "../src/assets/image/todak.png";
 
 function ImageQuestion() {
   // const {setLoggedIn} = useContext(AuthContext); // 전역 상태관리
@@ -8,13 +10,28 @@ function ImageQuestion() {
   const [selectedFile, setSelectedFile] = useState(null); // 실제 업로드한 파일
   const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
   const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
-  const KAKAO_API_URL = "https://dapi.kakao.com/v2/search/web";
-  const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16";
-  const [namuwikiDescription, setNamuwikiDescription] = useState(null); // API 호출 및 내용 추출 결과를 리액트에서 UI에 업데이트해서 화면에 표시하려면 상태로 관리
+  // const KAKAO_API_URL = "https://dapi.kakao.com/v2/search/web";
+  // const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16";
+  // const [namuwikiDescription, setNamuwikiDescription] = useState(null); // API 호출 및 내용 추출 결과를 리액트에서 UI에 업데이트해서 화면에 표시하려면 상태로 관리
 
   const [flipped, setFlipped] = useState(false); // 카드가 뒤집혔는지 상태변수
 
-  const diagnosis = "여드름"; // 테스트용
+  const diagnosisCases = {"전염성 피부질환" : "뭐냐 이건 카테고리 아니냐?",
+    "습진" : "여러 가지 자극물로 인하여 피부에 일어나는 염증. 벌겋게 붓거나 우툴두툴하게 부르트고, 물집이나 딱지가 생기거나 피부가 꺼칠해지는 것과 같은 여러 가지 증상이 나타나며 가려움을 동반하는 것이 특징입니다.",
+     "여드름" : "털 피지선 샘 단위의 만성 염증질환으로 면포(모낭 속에 고여 딱딱해진 피지), 구진(1cm 미만 크기의 솟아 오른 피부병변), 고름물집, 결절, 거짓낭 등 다양한 피부 변화가 나타나며, 이에 따른 후유증으로 오목한 흉터 또는 확대된 흉터를 남기기도 합니다. 피지선이 모여 있는 얼굴, 목, 가슴 등에 많이 발생하며 털을 만드는 모낭에 붙어있는 피지선에 염증이 생기는 질환을 말합니다. 보통 여드름은 주로 사춘기에 발생하며, 사춘기 청소년의 85%에서 관찰됩니다. 남자는 15세와 19세 사이에, 여자는 14세와 16세 사이에 발생 빈도가 높습니다.",
+      "색소침착" : "피부 또는 체내에 색소가 병적으로 나타나는 상태, 색소변성이라고도 합니다. 생리적으로 원래 있는 멜라닌 · 헤모지데린 등의 색소가 병적으로 증가하면 색소 출현 장소가 이상하거나 생리적으로 존재하지 않는 색소가 생기는 예 등이 있고, 색소침착에는 선천적인 것과 후천적인 것이 있습니다.",
+       "양성종양" : "발육 속도가 완만하여 성장에 한계가 있고 침윤이나 전이를 일으키지 아니하는 종양. 섬유종이나 지방종 따위가 전형적인 예입니다.",
+        "악성종양" : "증식력이 강하고 주위 조직에 대하여 침윤성과 파괴성이 있으며 온몸에 전이하여 치명적인 해를 주는 종양. 암종(癌腫)이나 육종(肉腫) 따위가 대표적입니다."};
+  
+  const diagnosis = "여드름"; // 프론트 테스트용
+
+  const diagnosisName = diagnosisResult?.diagnosisName || diagnosis; // diagnosis는 프론트 테스트용
+
+  const definition = diagnosisCases[diagnosisName] || diagnosisCases[diagnosis]; // 진단명 정의에 들어갈 변수
+
+  const [displayText, setDisplayText] = useState(''); // 현재 화면에 표시할 텍스트를 저장하는 상태
+  const [currentIndex, setCurrentIndex] = useState(0); // definition 문자열에서 현재 어디까지 읽었는지 인덱스를 저장하는 상태
+
 
   // 파일 업로드 핸들러
   const handleFileUpload = (e) => {
@@ -65,7 +82,7 @@ function ImageQuestion() {
       console.log(response.data);
       setDiagnosisResult(response.data); // 서버로부터 받은 응답(진단결과)을 상태에 저장
 
-      // API 호출이 성공저긍로 완료되면 카드를 뒤집는다.
+      // API 호출이 성공적으로 완료되면 카드를 뒤집는다.
       setFlipped(true);
     } catch (error) {
       setFlipped(true); // 이 부분은 프론트엔드 테스트용으로 추가한 부분이므로 복붙받으면 지우자
@@ -73,54 +90,66 @@ function ImageQuestion() {
     }
   };
 
-  // 카카오 웹문서 검색 API 호출하는 함수
-  const searchKakaoAPI = async (query) => {
-    try {
-      const response = await axios.get(KAKAO_API_URL, {
-        headers: {
-          Authorization: `KakaoAK ${KAKAO_API_KEY}`,
-        },
-        params: {
-          query: query,
-        },
-      });
+  // // 카카오 웹문서 검색 API 호출하는 함수
+  // const searchKakaoAPI = async (query) => {
+  //   try {
+  //     const response = await axios.get(KAKAO_API_URL, {
+  //       headers: {
+  //         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
+  //       },
+  //       params: {
+  //         query: query,
+  //       },
+  //     });
 
-      // 나무위키의 결과만 필터링
-      const namuwikiResult = response.data.documents.filter((doc) =>
-        doc.url.includes("namu.wiki")
-      );
-      console.log(namuwikiResult);
+  //     // 나무위키의 결과만 필터링
+  //     const namuwikiResult = response.data.documents.filter((doc) =>
+  //       doc.url.includes("namu.wiki")
+  //     );
+  //     console.log(namuwikiResult);
 
-      return namuwikiResult;
-    } catch (error) {
-      console.error("카카오 검색 API 호출 중 에러 :", error);
-      console.log("카카오 검색 API 호출 중 에러 :", error);
-      return null;
-    }
-  };
+  //     return namuwikiResult;
+  //   } catch (error) {
+  //     console.error("카카오 검색 API 호출 중 에러 :", error);
+  //     console.log("카카오 검색 API 호출 중 에러 :", error);
+  //     return null;
+  //   }
+  // };
 
-  // 나무위키 결과에서 "1.개요 뒤 부터 2. 종류전"까지의 내용(텍스트)을 추출하는 함수 - 정의 부분임
-  const extractNamuwikiContent = (content) => {
-    const regex = /1\. 개요([\s\S]*?)(?=2\. 종류)/;
-    const match = content.match(regex);
+  // // 나무위키 결과에서 "1.개요 뒤 부터 2. 종류전"까지의 내용(텍스트)을 추출하는 함수 - 정의 부분임
+  // const extractNamuwikiContent = (content) => {
+  //   const regex = /1\. 개요([\s\S]*?)(?=2\. 종류)/;
+  //   const match = content.match(regex);
 
-    if (match && match[1]) {
-      console.log(match[1].trim());
-      return match[1].trim(); // 추출한 텍스트의 앞뒤 공백 제거
-    }
-    console.log("원하는 텍스트 패턴을 못찾았어");
-    return null; // 원하는 텍스트 패턴을 찾지 못한 경우 null 반환
-  };
+  //   if (match && match[1]) {
+  //     console.log(match[1].trim());
+  //     return match[1].trim(); // 추출한 텍스트의 앞뒤 공백 제거
+  //   }
+  //   console.log("원하는 텍스트 패턴을 못찾았어");
+  //   return null; // 원하는 텍스트 패턴을 찾지 못한 경우 null 반환
+  // };
 
-  // 결과보기 버튼을 클릭했을 때의 핸들함수 (onClick 핸들러) - async 함수 자체는 promise를 반환하며, 해당 함수를 호출하는 곳에서 그 promise가 완료되기를 기다려주려면 또 다시 await를 사용해 완료를 기다려야 함.
+  // 결과보기 버튼을 클릭했을 때의 핸들함수 (onClick 핸들러) - async 함수 자체는 promise를 반환하며,
+  // 해당 함수를 호출하는 곳에서 그 promise가 완료되기를 기다려주려면 또 다시 await를 사용해 완료를 기다려야 함.
   const handleResultClick = async () => {
     await sendImageToFastAPi(selectedFile);
-    const kakaoResults = await searchKakaoAPI(diagnosis); // diagnosis는 예시
-    if (kakaoResults && kakaoResults.length > 0) {
-      const content = extractNamuwikiContent(kakaoResults[0].contents);
-      setNamuwikiDescription(content);
-    }
+    // const kakaoResults = await searchKakaoAPI(diagnosis); // diagnosis는 예시
+    // if (kakaoResults && kakaoResults.length > 0) {
+    //   const content = extractNamuwikiContent(kakaoResults[0].contents);
+    //   setNamuwikiDescription(content);
+    // }
   };
+
+  useEffect(() => {
+    if (currentIndex < definition.length) {  // definition의 모든 글자가 화면에 출력될 때까지 반복
+      const timer = setTimeout(() => {  // 일정 시간 후에 다음 글자를 화면에 추가하는 함수
+        setDisplayText((prevText) => prevText + definition[currentIndex]);  // 이전 텍스트에 새 글자 추가
+        setCurrentIndex((prevIndex) => prevIndex + 1);  // 다음 글자를 읽기 위해 인덱스 증가
+      }, [50]); // 50ms마다 한 글자씩 추가
+      
+      return () => clearTimeout(timer);  // 컴포넌트가 언마운트되거나 currentIndex가 변경되기 전에 setTimeout을 정리
+    }
+  }, [currentIndex, definition]);
 
   // // 네이버 백과사전 검색 API를 호출하는 함수
   // const searchNaverAPI = async (diagnosis) => {
@@ -313,7 +342,7 @@ function ImageQuestion() {
               margin: "0 auto 16px auto",
             }}
           >
-            <h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
+            <img src={토닥} style={{width:"15vw"}}/><h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
             {/* diagnoistName이라는 필드명을 사용했다는 가정 */}
           </div>
           <div
@@ -328,10 +357,11 @@ function ImageQuestion() {
               fontSize: "1.2rem",
               marginTop: "2vh",
               wordWrap: "break-word",
+              overflowWrap: "break-word"
             }}
           >
-            {diagnosisResult?.description || diagnosis}이란? :{" "}
-            {namuwikiDescription}
+            {diagnosisResult?.description || diagnosis}이란? :{displayText}
+            {/* {namuwikiDescription} */}
             {/* description이라는 필드명을 사용했다는 가정, 여기는 사람이 글을 써내려가듯이 or 챗지피티가 써내려가듯이 */}
           </div>
 

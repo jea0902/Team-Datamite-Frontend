@@ -1,14 +1,7 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./AuthContext";
-import { Paper } from "@mui/material";
+import React from "react";
 import "../src/css/App.css";
 
 export default function QnA() {
-  const { setIsLogin } = useContext(AuthContext);
-
-  const handleLoginTest = () => {
-    setIsLogin((prev) => !prev);
-  };
 
   return (
     <div
@@ -47,14 +40,8 @@ export default function QnA() {
         24시간 대기하고 있으니,
         <br />
         정성스레 답변을 도와드리겠습니다!
+        SatisfactionSurvey
       </div>
-
-      <button
-        onClick={handleLoginTest}
-        style={{ width: "250px", marginBottom: "50px" }}
-      >
-        프론트 테스트용 버튼
-      </button>
     </div>
   );
 }
