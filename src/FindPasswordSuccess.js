@@ -87,7 +87,7 @@ function FindPasswordSuccess() {
     return (
         <div className="container-sm">
             <div style={{ height: "50px" }}></div>
-            <div className="card w-50 mb-3 mx-auto align-items-center">
+            <div className="card w-50 mb-3 mx-auto align-items-center" style={{border:0}}>
                 <div className="card-body w-100">
                     <div className="text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '80px' }} fill="currentColor" className="bi bi-person-check" viewBox="0 0 16 16">
@@ -109,7 +109,7 @@ function FindPasswordSuccess() {
                                 onChange={onChange} value={password} placeholder="새 비밀번호를 입력해주세요."
                                 type="password" name="password" id="password" className="form-control input-icon-placeholder2"
                             />
-                            <div style={{ fontSize: '12px', color: isValid ? 'green' : 'grey' }}>
+                            <div style={{ marginLeft:"5px", marginTop:"5px",fontSize: '12px', color: isValid ? 'green' : 'grey' }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
                                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
                                 </svg>
@@ -127,7 +127,7 @@ function FindPasswordSuccess() {
                             />
                         </div>
                         <div className="d-grid gap-2">
-                            <button className="btn btn-secondary" type="submit">확인</button>
+                            <button className="btn btn-secondary" type="submit" style={{backgroundColor:"#8EC6E6", color:'white',border:0}}>확인</button>
                         </div>
                     </form>
                 </div>

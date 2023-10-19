@@ -58,16 +58,3 @@ body {
 .navbar-brand {
   font-family: "JALNAN";
 }
-
-.comment-container {
-  /* 10-19 재혁 추가 - find-id/success  */
-  font-family: "NOTOEXTRA";
-}
-
-.findId-findPwBtn {
-  font-family: "NOTOEXTRA";
-}
-
-.findId-loginBtn {
-  font-family: "BMJUA";
-}

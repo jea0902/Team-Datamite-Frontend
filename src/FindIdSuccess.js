@@ -5,10 +5,11 @@ function FindIdSuccess() {
   const id = location.state ? location.state.id : null;
 
   return (
-    <div className="container-lg">
+    <div className="container-lg" style={{ paddingTop: "50px", paddingBottom:"50px"}}>
       <div style={{ height: "50px" }}></div>
-      <div className="card w-50 mb-3 mx-auto align-items-center">
+      <div className="card w-50 mb-3 mx-auto align-items-center" style={{paddingBottom:"15px", height:"auto" ,border:0}}>
         <div className="card-body row w-100 text-center">
+          {/* 복잡하네 row가 있어서 배열이 가능하긴 한데, 높이 조정을 막아버렸네 */}
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,28 +29,30 @@ function FindIdSuccess() {
             </h6>
           </div>
           <div
-            className="card text-bg-light mb-3"
-            style={{ maxwidth: "18rem", marginTop: "20px" }}
+            className="card mb-3"
+            style={{ maxwidth: "18rem", marginTop: "35px", backgroundColor:"#8EC6E6", border:0}}
           >
             <div className="card-body">
-              <h5 className="card-title">{String(id)}</h5>
+              <h5 className="card-title" style={{color:"white"}}>{String(id)}</h5>
               {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> */}
             </div>
           </div>
-          <a
-            href="#"
-            className=" col-md-6 mb-3 btn btn-secondary findId-findPwBtn"
-            style={{ padding: "10px 5px" }}
-          >
-            비밀번호 찾기
-          </a>
-          <a
-            href="#"
-            className=" col-md-6 mb-3 btn btn-secondary findId-loginBtn"
-            style={{ padding: "10px 5px" }}
-          >
-            로그인
-          </a>
+          <div style={{ height: "15px" }}></div>
+            <a
+              href="/login"
+              className="col btn btn-secondary findId-findPwBtn"
+              // mb-6는 어차피 다른 css 때문에 막혀있었고, col 덕분에 그리드시스템 이용 가로로 나열
+              style={{ padding: "10px 5px", backgroundColor:"#8EC6E6", color:'white',  marginRight: "20px", border:0}}
+            >
+              로그인
+            </a>
+            <a
+              href="/find-password/success"
+              className="col btn btn-secondary findId-loginBtn"
+              style={{ padding: "10px 5px", backgroundColor:"white", color:'#8EC6E6', borderColor:"#8EC6E6" }}
+            >
+              비밀번호 찾기
+            </a>
         </div>
       </div>
     </div>
