@@ -21,7 +21,7 @@ function FindIdSuccess() {
               <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"></path>
             </svg>
           </div>
-          <div>
+          <div className="comment-container" style={{ marginTop: "20px" }}>
             <h6>
               본인인증정보와 일치하는 결과입니다. <br /> 로그인 후 이용해
               주세요.
@@ -36,10 +36,18 @@ function FindIdSuccess() {
               {/* <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> */}
             </div>
           </div>
-          <a href="#" className=" col-md-6 mb-3 btn btn-secondary">
+          <a
+            href="#"
+            className=" col-md-6 mb-3 btn btn-secondary findId-findPwBtn"
+            style={{ padding: "10px 5px" }}
+          >
             비밀번호 찾기
           </a>
-          <a href="#" className=" col-md-6 mb-3 btn btn-secondary">
+          <a
+            href="#"
+            className=" col-md-6 mb-3 btn btn-secondary findId-loginBtn"
+            style={{ padding: "10px 5px" }}
+          >
             로그인
           </a>
         </div>

@@ -9,7 +9,7 @@ function ImageQuestion() {
   const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
   const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
   const KAKAO_API_URL = "https://dapi.kakao.com/v2/search/web";
-  const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16"
+  const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16";
   const [namuwikiDescription, setNamuwikiDescription] = useState(null); // API 호출 및 내용 추출 결과를 리액트에서 UI에 업데이트해서 화면에 표시하려면 상태로 관리
 
   const [flipped, setFlipped] = useState(false); // 카드가 뒤집혔는지 상태변수
@@ -78,21 +78,23 @@ function ImageQuestion() {
     try {
       const response = await axios.get(KAKAO_API_URL, {
         headers: {
-          Authorization: `KakaoAK ${KAKAO_API_KEY}`
+          Authorization: `KakaoAK ${KAKAO_API_KEY}`,
         },
         params: {
-          query: query
-        }
+          query: query,
+        },
       });
 
       // 나무위키의 결과만 필터링
-      const namuwikiResult = response.data.documents.filter(doc => doc.url.includes("namu.wiki"));
+      const namuwikiResult = response.data.documents.filter((doc) =>
+        doc.url.includes("namu.wiki")
+      );
       console.log(namuwikiResult);
-      
+
       return namuwikiResult;
     } catch (error) {
-      console.error("카카오 검색 API 호출 중 에러 :",error);
-      console.log("카카오 검색 API 호출 중 에러 :",error);
+      console.error("카카오 검색 API 호출 중 에러 :", error);
+      console.log("카카오 검색 API 호출 중 에러 :", error);
       return null;
     }
   };
@@ -101,13 +103,13 @@ function ImageQuestion() {
   const extractNamuwikiContent = (content) => {
     const regex = /1\. 개요([\s\S]*?)(?=2\. 종류)/;
     const match = content.match(regex);
-    
+
     if (match && match[1]) {
       console.log(match[1].trim());
-      return match[1].trim();  // 추출한 텍스트의 앞뒤 공백 제거
+      return match[1].trim(); // 추출한 텍스트의 앞뒤 공백 제거
     }
     console.log("원하는 텍스트 패턴을 못찾았어");
-    return null;  // 원하는 텍스트 패턴을 찾지 못한 경우 null 반환
+    return null; // 원하는 텍스트 패턴을 찾지 못한 경우 null 반환
   };
 
   // 결과보기 버튼을 클릭했을 때의 핸들함수 (onClick 핸들러) - async 함수 자체는 promise를 반환하며, 해당 함수를 호출하는 곳에서 그 promise가 완료되기를 기다려주려면 또 다시 await를 사용해 완료를 기다려야 함.
@@ -119,7 +121,6 @@ function ImageQuestion() {
       setNamuwikiDescription(content);
     }
   };
-  
 
   // // 네이버 백과사전 검색 API를 호출하는 함수
   // const searchNaverAPI = async (diagnosis) => {
@@ -164,14 +165,14 @@ function ImageQuestion() {
         justifyContent: "center",
         marginTop: "50px",
         marginBottom: "300px",
-        marginTop: "100px",
+        marginTop: "50px",
       }}
     >
       <div
         className="card"
         style={{
           display: "flex",
-          justifyContent: "cneter",
+          justifyContent: "center",
           alignItems: "center",
           perspective: "1500px",
           width: "100%",
@@ -249,12 +250,13 @@ function ImageQuestion() {
             </div>
           </div>
 
-          <div className="dragOrPreview"
+          <div
+            className="dragOrPreview"
             onDragOver={onDragOver}
             onDrop={onDrop}
             style={{
               width: "80%",
-              height: "30vh",
+              height: "20vh",
               margin: "0 auto 16px auto",
               marginBottom: "16px",
               background: imagePreview
@@ -264,7 +266,9 @@ function ImageQuestion() {
               boxSizing: "border-box",
             }}
           >
-            <br /><br /><br />
+            <br />
+            <br />
+            <br />
             이곳에 드래그 하셔도 파일 업로드가 가능해요!
           </div>
 
@@ -272,9 +276,7 @@ function ImageQuestion() {
             <Button
               variant="contained"
               color="primary"
-              onClick={
-                handleResultClick
-              } // 실제 파일 객체를 전달
+              onClick={handleResultClick} // 실제 파일 객체를 전달
               style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
             >
               결과보기
@@ -298,7 +300,6 @@ function ImageQuestion() {
             opacity: flipped ? 1 : 0, // flipped 상태에 따른 투명도 변경
             transition: "opacity 0.5s",
             transform: "rotateY(180deg)",
-            opacity: flipped ? 1 : 0,
             zIndex: flipped ? 10 : 5,
           }}
         >
@@ -315,7 +316,8 @@ function ImageQuestion() {
             <h5>진단명 : {diagnosisResult?.diagnosisName || diagnosis}</h5>
             {/* diagnoistName이라는 필드명을 사용했다는 가정 */}
           </div>
-          <div className="diagnosisResult"
+          <div
+            className="diagnosisResult"
             style={{
               width: "80%",
               margin: "0 auto 16px auto",
@@ -328,7 +330,8 @@ function ImageQuestion() {
               wordWrap: "break-word",
             }}
           >
-            {diagnosisResult?.description || diagnosis}이란? : {namuwikiDescription}
+            {diagnosisResult?.description || diagnosis}이란? :{" "}
+            {namuwikiDescription}
             {/* description이라는 필드명을 사용했다는 가정, 여기는 사람이 글을 써내려가듯이 or 챗지피티가 써내려가듯이 */}
           </div>
 
@@ -345,7 +348,8 @@ function ImageQuestion() {
               wordWrap: "break-word",
             }}
           >
-            ✔️치료는 안전하게 피부과의 전문의와 상담하세요! <br /> 그게 치료의 가장 빠른 지름길입니다.
+            ✔️치료는 안전하게 피부과의 전문의와 상담하세요! <br /> 그게 치료의
+            가장 빠른 지름길입니다.
           </div>
         </div>
       </div>
