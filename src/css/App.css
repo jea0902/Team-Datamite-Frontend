@@ -1,0 +1,45 @@
+@font-face {
+  font-family: "BMJUA";
+  src: url("../assets/font/BMJUA_TTF.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "NOTOSANS";
+  src: url("../assets/font/NotoSansKR-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NOTOEXTRA";
+  src: url("../assets/font/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "AppleNeo";
+  src: url("../assets/font/AppleSDGothicNeoB.ttf");
+}
+
+body {
+  font-family: "BMJUA";
+}
+
+/* body {
+  font-family: "AppleNeo";
+} */
+
+/* body {
+  font-family: "NOTOEXTRA";
+} */
+
+.container-fluid {
+  font-family: "NOTOEXTRA";
+}
+
+.footer {
+  font-family: "NOTOSANS";
+}
+
+
+
+.QnA-Box {
+  font-family: "BMJUA";
+}
