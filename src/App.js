@@ -1,30 +1,35 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import 'bootstrap/dist/css/bootstrap.css'
-import "bootstrap/dist/js/bootstrap.min.js"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { IsLoginProvider, useIsLoginState, useUserData  } from "../src/AuthContext";
+import {
+  IsLoginProvider,
+  useIsLoginState,
+  useUserData,
+} from "../src/AuthContext";
 
 import Navbar from "./Navbar";
 
-import Main from "./Main"
-import Signup from "../src/MemberComponent/Signup"
-import Login from "../src/MemberComponent/Login"
-import FindId from "../src/MemberComponent/FindId"
-import FindIdSuccess from "../src/MemberComponent/FindIdSuccess"
-import FindPassword from "../src/MemberComponent/FindPassword"
-import FindPasswordSuccess from "../src/MemberComponent/FindPasswordSuccess"
+import Main from "./Main";
+import Signup from "../src/MemberComponent/Signup";
+import Login from "../src/MemberComponent/Login";
+import FindId from "../src/MemberComponent/FindId";
+import FindIdSuccess from "../src/MemberComponent/FindIdSuccess";
+import FindPassword from "../src/MemberComponent/FindPassword";
+import FindPasswordSuccess from "../src/MemberComponent/FindPasswordSuccess";
 
-import Mypage from "../src/MypageComponent/Mypage"
+import Mypage from "../src/MypageComponent/Mypage";
 
 import MemberChat from "./Chatbot/MemberChat";
 import NonMemberChat from "./Chatbot/NonMemberChat";
 import ImageQuestion from "./ImageQuestion";
 
+import Footer from "./Footer";
+
 function App() {
-  
   const isLogin = useIsLoginState();
 
   return (
@@ -51,7 +56,7 @@ function App() {
                 display: "flex",
                 flexDirection: "column",
                 paddingTop: "50px", // 패딩은 실제 크기를 증가시킴. 마진은 내부를 조절하는 것.
-                height: "80%"
+                height: "80%",
               }}
             >
               <Routes>
@@ -62,7 +67,10 @@ function App() {
                 <Route path="/find-id" element={<FindId />} />
                 <Route path="/find-id/success" element={<FindIdSuccess />} />
                 <Route path="/find-password" element={<FindPassword />} />
-                <Route path="/find-password/success" element={<FindPasswordSuccess />}/>
+                <Route
+                  path="/find-password/success"
+                  element={<FindPasswordSuccess />}
+                />
                 {/* 챗봇 */}
                 {isLogin ? (
                   <Route path="/chat" element={<MemberChat />} />
@@ -70,10 +78,14 @@ function App() {
                   <Route path="/chat" element={<NonMemberChat />} />
                 )}
                 {/* 이미지로 물어보기 */}
-                <Route path="/ask-image" element={<ImageQuestion/>}/>
+                <Route path="/ask-image" element={<ImageQuestion />} />
                 {/* 마이페이지 */}
                 <Route path="/mypage" element={<Mypage />} />
               </Routes>
+            </div>
+            <div className="Footer-Container" style={{ flexShrink: 0 }}>
+              {/* flexShrink는 Footer 높이가 메인컨텐츠에 따라 유연하게 조절되도록 */}
+              <Footer />
             </div>
           </div>
         </BrowserRouter>

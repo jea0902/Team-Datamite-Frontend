@@ -49,7 +49,8 @@ function Signup() {
   async function checkId() {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/auth/checkId?id=${id}`
+        // `http://localhost:8080/api/auth/checkId?id=${id}`
+        `http://3.37.43.105:8080/api/auth/checkId?id=${id}`
       );
       console.log(response.data);
 
@@ -291,7 +292,8 @@ function Signup() {
 
       try {
         const result = await axios.post(
-          "http://localhost:8080/api/auth/signup",
+          // "http://localhost:8080/api/auth/signup"
+          "http://3.37.43.105:8080/api/auth/signup",
           {
             id: id,
             password: password,

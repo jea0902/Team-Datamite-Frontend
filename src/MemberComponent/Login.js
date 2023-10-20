@@ -94,7 +94,8 @@ function Login() {
     if (isIdOk && isPasswordOk) {
       try {
         const result = await axios.post(
-          "http://localhost:8080/api/auth/login",
+          // "http://localhost:8080/api/auth/login"
+          "http://3.37.43.105:8080/api/auth/login",
           {
             id: id,
             password: password,
@@ -122,7 +123,7 @@ function Login() {
         console.log(error);
         // 에러 처리 코드를 여기에 추가하세요.
       }
-    } 
+    }
     // else {
     //   alert("입력한 정보를 다시 한번 확인해 주세요.");
     // }
@@ -133,7 +134,8 @@ function Login() {
 
     try {
       const result = await axios.get(
-        "http://localhost:8080/api/members/profile",
+        // "http://localhost:8080/api/members/profile"
+        "http://3.37.43.105:8080/api/members/profile",
         {
           headers: {
             Authorization: accessToken,
@@ -228,7 +230,7 @@ function Login() {
               <button
                 className="btn btn-outline-light"
                 type="submit"
-                style={{ backgroundColor: "#8ec6e6", color:"white" }}
+                style={{ backgroundColor: "#8ec6e6", color: "white" }}
               >
                 로그인
               </button>
