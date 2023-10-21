@@ -370,8 +370,6 @@ function ImageQuestion() {
             }}
           >
             {diagnosisResult?.description || diagnosis}이란? :{displayText}
-            {/* {namuwikiDescription} */}
-            {/* description이라는 필드명을 사용했다는 가정, 여기는 사람이 글을 써내려가듯이 or 챗지피티가 써내려가듯이 */}
           </div>
 
           <div

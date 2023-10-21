@@ -106,7 +106,7 @@ function Navbar() {
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/ask/image">
+                  <a class="nav-link" href="/qna">
                     문의하기
                   </a>
                 </li>
@@ -127,17 +127,17 @@ function Navbar() {
                     <ul class="dropdown-menu">
                       <li>
                         <a class="dropdown-item" href="/mypage">
-                          <i class="bi bi-person-circle"></i> Profile
+                          <i class="bi bi-person-circle"></i> 프로필
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item" href="#">
-                          <i class="bi bi-chat-dots"></i> Chat History
+                          <i class="bi bi-chat-dots"></i> 채팅 기록
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item" href="#">
-                          <i class="bi bi-graph-up"></i> Dashboard
+                          <i class="bi bi-graph-up"></i> 대시보드
                         </a>
                       </li>
                       <li>
@@ -149,7 +149,7 @@ function Navbar() {
                             class="bi bi-power"
                             style={{ fontWeight: "bold" }}
                           ></i>{" "}
-                          Log out
+                          로그아웃
                         </a>
                       </li>
                     </ul>

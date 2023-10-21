@@ -28,6 +28,7 @@ import NonMemberChat from "./Chatbot/NonMemberChat";
 import ImageQuestion from "./ImageQuestion";
 
 import Footer from "./Footer";
+import QnA from "./QnA";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -81,6 +82,7 @@ function App() {
                 <Route path="/ask-image" element={<ImageQuestion />} />
                 {/* 마이페이지 */}
                 <Route path="/mypage" element={<Mypage />} />
+                <Route path="/qna" element={<QnA />} />
               </Routes>
             </div>
             <div className="Footer-Container" style={{ flexShrink: 0 }}>
