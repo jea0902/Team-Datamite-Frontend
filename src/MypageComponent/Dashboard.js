@@ -32,38 +32,41 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="flex-grow-1 ms-3">
-                <div className="row">
-                <div className="col-md-12 mb-4">
-                    {/* 대시보드 */}
-                    <div className="card text-center">
-                        <div className="card-header">
-                            <ul
-                                className="nav nav-tabs card-header-tabs"
-                                id="myTab"
-                                role="tablist"
-                            >
-                                <li className="nav-item" role="presentation">
-                                    <button
-                                        className="nav-link active"
-                                        id="home-tab"
-                                        aria-selected="true"
+                    <div className="row">
+                        <div className="col-md-12 mb-4">
+                            {/* 대시보드 */}
+                            <div className="card text-center">
+                                <div className="card-header">
+                                    <ul
+                                        className="nav nav-tabs card-header-tabs"
+                                        id="myTab"
+                                        role="tablist"
                                     >
-                                        <i className="bi bi-graph-up"></i> 대시보드
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="card-body">
-                            <iframe
-                                src="https://prod-apnortheast-a.online.tableau.com/t/xn3j1ba317uba/views/Dashboard/1?:origin=card_share_link&:&showVizHome=no&:embed=true"
-                                width="100%"
-                                height="850"
-                                title="토닥토닥 대시보드"
-                            />
+                                        <li className="nav-item" role="presentation">
+                                            <button
+                                                className="nav-link active"
+                                                id="home-tab"
+                                                aria-selected="true"
+                                            >
+                                                <i className="bi bi-graph-up"></i> 대시보드
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="card-body" style={{minHeight: "365px"}}>
+                                    <div>
+                                        <iframe
+                                            src="https://prod-apnortheast-a.online.tableau.com/t/xn3j1ba317uba/views/Dashboard/1?:origin=card_share_link&:&showVizHome=no&:embed=true"
+                                            width="90%"
+                                            height="500"
+                                            // height="850"
+                                            title="토닥토닥 대시보드"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
                 </div>
             </div>
         </div>

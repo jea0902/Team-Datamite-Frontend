@@ -4,6 +4,7 @@ import moment from "moment";
 
 import "../css/Chat.css";
 import logo from "../assets/image/datamiteLogo.png";
+import person from "../assets/image/person-fill.svg";
 
 import KakaoMap from "./KakaoMap/KakaoMap";
 
@@ -384,7 +385,7 @@ function NonMemberChat() {
   }
 
   return (
-    <div className="container-lg mt-5">
+    <div className="container-lg mt-5 mb-5">
       <div className="row justify-content-center h-100">
         <div className="col-xl-4 chat">
           {/* <div className="col-md-8 col-xl-6 chat"> */}
@@ -428,7 +429,7 @@ function NonMemberChat() {
                       <div className="msg_cotainer_send">{message.content}</div>
                       <div className="img_cont_msg">
                         <img
-                          src={logo}
+                          src={person}
                           className="rounded-circle user_img_msg"
                           alt="User"
                         />

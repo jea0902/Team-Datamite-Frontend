@@ -57,7 +57,7 @@ function ChatHistory() {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="card-body" style={{ height: "365px" }}>
+                                <div className="card-body" style={{ height: "500px" }}>
                                     <MyChatHistory />
                                 </div>
                             </div>

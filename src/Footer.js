@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="footer" style={{ display: "flex" }}>
+    <div className="footer" style={{ display: "flex"}}>
       <div style={{ ...styles.footerContainer, flex: 7 }}>
         <p style={{ fontSize: "15px" }}>
           <strong>데이터마이트 주식회사</strong>

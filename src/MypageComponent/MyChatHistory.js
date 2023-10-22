@@ -98,7 +98,7 @@ function MyChatHistory() {
   /////////////////////////////////////////////////////////////////////////
   // 페이지 네이션
   const [currentPage, setCurrentPage] = useState(null); // 현재 페이지
-  const itemsPerPage = 5; // 한 페이지당 보여질 아이템 수
+  const itemsPerPage = 10; // 한 페이지당 보여질 아이템 수
   const [totalPages, setTotalPages] = useState(0);
 
   // useEffect(() => {
@@ -195,10 +195,35 @@ function MyChatHistory() {
 
     setIsOpenModal(true);
   }, [currentChatId]);
+
+
+  async function onDelete(chatId) {
+    const shouldDeleteChat = window.confirm("정말 삭제하시겠습니까?");
+    if (shouldDeleteChat) {
+      const accessToken = window.localStorage.getItem("AccessToken");
+      try {
+        console.log(chatId);
+        // 삭제할 채팅의 chatId를 서버로 전송
+        const response = await axios.delete(`http://3.37.43.105:8080/api/deleteChat/${chatId}`,
+        // const response = await axios.delete(`https://localhost:8080/api/deleteChat/${chatId}`,
+          );
+
+        if (response.status === 200) {
+          window.location.reload();
+        }
+
+      } catch (error) {
+        console.log(error)
+        alert("서버 상의 문제로 탈퇴하지 못하였습니다.");
+      }
+
+    }
+
+  };
   ////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div style={{ height: "468px" }}>
       <div className="row">
         <div className="col-8">
           {/* <input type="search" className="form-control form-control-sm" placeholder="Search" aria-label="Search" /> */}
@@ -206,8 +231,8 @@ function MyChatHistory() {
         <div className="col-4 mb-3">
           <select
             className="form-select form-select-sm"
-            // value={filterSpeciality}
-            // onChange={(e) => setFilterSpeciality(e.target.value)}
+          // value={filterSpeciality}
+          // onChange={(e) => setFilterSpeciality(e.target.value)}
           >
             <option value="">전체 진료과</option>
             <option value="내과" style={{ paddingRight: "10px" }}>
@@ -227,84 +252,90 @@ function MyChatHistory() {
         </div>
       </div>
       {showList && (
-        <div className="table-responsive d-flex justify-content-center">
-          <table className="table table-sm">
-            <thead style={{ fontWeight: "normal" }}>
-              <tr className="table-hover-effect">
-                <th className="text-center align-middle" scope="col">
-                  채팅 번호
-                </th>
-                <th className="text-center align-middle" scope="col">
-                  진료과
-                </th>
-                <th className="text-center align-middle" scope="col">
-                  채팅한 날짜
-                </th>
-                <th className="text-center align-middle" scope="col"></th>
-              </tr>
-            </thead>
-            <tbody className="table-group-divider">
-              {currentItems.map((chat, index) => {
-                // 'SPECIALITY' MessageType을 가진 메시지 찾기
-                let specialityMessage = chat.messageList.find(
-                  (message) => message.messageType === "SPECIALITY"
-                );
+        <div style={{ height: "390px" }}>
+          <div className="table-responsive d-flex justify-content-center">
+            <table className="table table-sm">
+              <thead style={{ fontWeight: "normal" }}>
+                <tr className="table-hover-effect">
+                  <th className="text-center align-middle" scope="col">
+                    채팅 번호
+                  </th>
+                  <th className="text-center align-middle" scope="col">
+                    진료과
+                  </th>
+                  <th className="text-center align-middle" scope="col">
+                    채팅한 날짜
+                  </th>
+                  <th className="text-center align-middle" scope="col">
+                    삭제
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="table-group-divider">
+                {currentItems.map((chat, index) => {
+                  // 'SPECIALITY' MessageType을 가진 메시지 찾기
+                  let specialityMessage = chat.messageList.find(
+                    (message) => message.messageType === "SPECIALITY"
+                  );
 
-                // 찾은 메시지의 내용을 변수에 저장
-                let specialityMessageContent = specialityMessage
-                  ? specialityMessage.content
-                  : "";
+                  // 찾은 메시지의 내용을 변수에 저장
+                  let specialityMessageContent = specialityMessage
+                    ? specialityMessage.content
+                    : "";
 
-                return (
-                  <tr key={index}>
-                    <td className="text-center">{index + 1}</td>
-                    <td className="text-center">
-                      <a
-                        href="#"
-                        className="link-dark link-underline-light"
-                        onClick={(event) => handleLinkClick(event, chat.chatId)}
-                        data-bs-toggle="modal"
-                        data-bs-target={`#chat${currentChatId}`}
-                      >
-                        {specialityMessageContent}
-                      </a>
-                    </td>
-                    <td className="text-center">
-                      {moment(chat.createDate).format("YYYY-MM-DD")}
-                      {/* {moment(chat.createDate).format("YYYY-MM-DD HH:mm:ss")} */}
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-link link-danger pt-0 pb-0"
-                        onClick={() => onDelete(chat.chatId)}
-                      >
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                  return (
+                    <tr key={index}>
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">
+                        <a
+                          href="#"
+                          className="link-dark link-underline-light"
+                          onClick={(event) => handleLinkClick(event, chat.chatId)}
+                          data-bs-toggle="modal"
+                          data-bs-target={`#chat${currentChatId}`}
+                        >
+                          {specialityMessageContent}
+                        </a>
+                      </td>
+                      <td className="text-center">
+                        {moment(chat.createDate).format("YYYY-MM-DD")}
+                        {/* {moment(chat.createDate).format("YYYY-MM-DD HH:mm:ss")} */}
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-link link-danger pt-0 pb-0"
+                          onClick={() => onDelete(chat.chatId)}
+                        >
+                          <i className="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
       {/* 페이지네이션 */}
       {showPagenation && (
-        <nav aria-label="Page navigation example">
-          <ul className="pagination justify-content-center">
-            {pageNumbers.map((page) => (
-              <li
-                key={page}
-                className={`page-item ${page === currentPage ? "active" : ""}`}
-              >
-                <a className="page-link" onClick={() => handlePageChange(page)}>
-                  {page}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="align-items-end">
+          <nav aria-label="Page navigation example">
+            <ul className="pagination justify-content-center">
+              {pageNumbers.map((page) => (
+                <li
+                  key={page}
+                  className={`page-item ${page === currentPage ? "active" : ""}`}
+                >
+                  <a className="page-link" onClick={() => handlePageChange(page)}>
+                    {page}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       )}
 
       {isOpenModal && (

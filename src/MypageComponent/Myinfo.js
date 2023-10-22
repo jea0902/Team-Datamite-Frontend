@@ -7,6 +7,7 @@ import { useUserData, AuthContext } from "../AuthContext";
 
 function Myinfo() {
   const navigate = useNavigate();
+  const {setUserData} = useContext(AuthContext);
 
   ////////////////////////////////////////////////////////////////////////////////////////////
   // 마이페이지 <회원정보>
@@ -96,7 +97,7 @@ function Myinfo() {
       try {
         const result = await axios.delete(
           //   "http://localhost:8080/api/members/delete/account"
-          "https://3.37.43.105:8080/api/members/delete/account",
+          "http://3.37.43.105:8080/api/members/delete/account",
           {
             headers: {
               Authorization: accessToken,
@@ -256,15 +257,15 @@ function Myinfo() {
         );
         if (result.status === 200) {
           console.log("회원정보수정 완료");
-          // setUserData({
-          //     memberId: userData.memberId,
-          //     name: userData.name,
-          //     birthDate: birthday8,
-          //     gender: gender,
-          //     email: email,
-          // })
+          setUserData({
+              memberId: userData.memberId,
+              name: userData.name,
+              birthDate: birthday8,
+              gender: gender,
+              email: email,
+          })
           handleCloseSecondModal();
-          navigate("/mypage");
+          navigate("/profile");
         }
       } catch (error) {
         console.log(error);
@@ -319,10 +320,10 @@ function Myinfo() {
           </label>
         </div>
         <hr />
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
           <a
             id="testbutton"
-            class="btn member_btn"
+            className="btn member_btn"
             onClick={handleUpdateInfo}
             // onClick={handleShowFirstModal}
           >
@@ -331,7 +332,7 @@ function Myinfo() {
           <a
             id="testbutton"
             href="#"
-            class="btn btn-outline-danger"
+            className="btn btn-outline-danger"
             // onClick={handleShowFirstModal}
             onClick={handleWithdrawal}
           >
@@ -345,10 +346,10 @@ function Myinfo() {
           <Modal.Title>현재 비밀번호 확인</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="mb-3">
+          <div className="mb-3">
             <input
               type="password"
-              class="form-control password-form"
+              className="form-control password-form"
               id="currentPassword"
               name="currentPassword"
               onChange={onChangePassword}
