@@ -21,13 +21,16 @@ import FindIdSuccess from "../src/MemberComponent/FindIdSuccess";
 import FindPassword from "../src/MemberComponent/FindPassword";
 import FindPasswordSuccess from "../src/MemberComponent/FindPasswordSuccess";
 
-import Mypage from "../src/MypageComponent/Mypage";
-
-import MemberChat from "./Chatbot/MemberChat";
-import NonMemberChat from "./Chatbot/NonMemberChat";
+import MemberChat from "./ChatbotComponent/MemberChat";
+import NonMemberChat from "./ChatbotComponent/NonMemberChat";
 import ImageQuestion from "./ImageQuestion";
 
 import Footer from "./Footer";
+import Dashboard from "./MypageComponent/Dashboard";
+import Profile from "./MypageComponent/Profile";
+import ChatHistory from "./MypageComponent/ChatHistory";
+
+import QnA from "./QnA";
 
 function App() {
   const isLogin = useIsLoginState();
@@ -77,10 +80,17 @@ function App() {
                 ) : (
                   <Route path="/chat" element={<NonMemberChat />} />
                 )}
+
                 {/* 이미지로 물어보기 */}
                 <Route path="/ask-image" element={<ImageQuestion />} />
+
                 {/* 마이페이지 */}
-                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/profile" element={<Profile/>}/>
+                <Route path="/chat-history" element={<ChatHistory/>}/>
+                <Route path="/dashboard" element={<Dashboard/>}/>
+
+                {/* QnA */}
+                <Route path="/qna" element={<QnA/>}/>
               </Routes>
             </div>
             <div className="Footer-Container" style={{ flexShrink: 0 }}>

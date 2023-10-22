@@ -349,7 +349,7 @@ function KakaoMap({ resultSpeciality, onMarkerClick }) {
   return (
     <div
       className="map-container"
-      style={{ position: 'relative', height: 'calc(72vh)' }}>
+      style={{ position: 'relative', height: 'calc(80.5vh)' }}>
       <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
       <select
         className='form-select'

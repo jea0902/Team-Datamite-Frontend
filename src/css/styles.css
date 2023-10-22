@@ -1,11 +1,11 @@
-.pagination li a.page-link{
+.pagination li a.page-link {
     color: #8EC6E6;
 }
 
 .pagination li a.page-link:hover,
 .pagination li a.page-link:focus,
 .pagination li.active a.page-link:hover,
-.pagination li.active a.page-link{
+.pagination li.active a.page-link {
     color: #fff;
     background: #8EC6E6;
     border-color: #8EC6E6;
@@ -13,7 +13,7 @@
 
 table.table>tbody>tr:hover td,
 table.table>tbody>tr:hover th {
-  background-color: #eff4f8 !important;
+    background-color: #eff4f8 !important;
 }
 
 .member_btn {
@@ -51,4 +51,36 @@ table.table>tbody>tr:hover th {
 .usual_btn:hover {
     border-color: #7aa6c0 !important;
     background-color: #7aa6c0 !important;
+}
+
+.list-group .list-group-item-action.active {
+    border: none;
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+ul.dropdown-menu>li>a:focus {
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+ul.dropdown-menu>li>a:hover {
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+
+/* placeholder의 스타일 */
+.password-form::placeholder {
+    font-family: "BMJUA" !important;
+    align-items: center;
+}
+
+.password-form {
+    font-family: "NOTOSANS" !important;
+    color: #000 !important;
+    align-items: center !important;
 }

@@ -200,8 +200,8 @@ function MyChatHistory() {
   return (
     <div>
       <div className="row">
-        <div class="col-8">
-          {/* <input type="search" class="form-control form-control-sm" placeholder="Search" aria-label="Search" /> */}
+        <div className="col-8">
+          {/* <input type="search" className="form-control form-control-sm" placeholder="Search" aria-label="Search" /> */}
         </div>
         <div className="col-4 mb-3">
           <select
@@ -292,13 +292,13 @@ function MyChatHistory() {
       {/* 페이지네이션 */}
       {showPagenation && (
         <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
+          <ul className="pagination justify-content-center">
             {pageNumbers.map((page) => (
               <li
                 key={page}
-                class={`page-item ${page === currentPage ? "active" : ""}`}
+                className={`page-item ${page === currentPage ? "active" : ""}`}
               >
-                <a class="page-link" onClick={() => handlePageChange(page)}>
+                <a className="page-link" onClick={() => handlePageChange(page)}>
                   {page}
                 </a>
               </li>

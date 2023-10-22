@@ -318,7 +318,7 @@ function Signup() {
     <div className="container-sm">
       <div style={{ height: "50px" }}></div>
       <div
-        className="card mb-3 mx-auto align-items-center"
+        className="card mb-3 mx-auto align-items-center shadow-lg bg-body-tertiary rounded"
         style={{ width: "30rem" }}
       >
         <div className="card-body w-100">
@@ -391,7 +391,7 @@ function Signup() {
                 type="password"
                 name="password"
                 id="password"
-                className="form-control input-icon-placeholder2"
+                className="form-control password-form input-icon-placeholder2"
               />
               {pwError && (
                 <div
@@ -413,7 +413,7 @@ function Signup() {
                 type="password"
                 name="password2"
                 id="password2"
-                className="form-control input-icon-placeholder2"
+                className="form-control password-form input-icon-placeholder2"
               />
               {pwError2 && (
                 <div
@@ -501,8 +501,9 @@ function Signup() {
                   className="btn btn-outline-secondary"
                   htmlFor="btncheck1"
                   style={{
-                    color: selected.btn1 ? "white" : "gray",
-                    borderColor: "gray",
+                    color: selected.btn1 ? "white" : "#8EC6E6",
+                    backgroundColor: selected.btn1 ? "#8EC6E6" : "white",
+                    borderColor: "#8EC6E6",
                   }}
                 >
                   남자
@@ -523,8 +524,9 @@ function Signup() {
                   className="btn btn-outline-secondary"
                   htmlFor="btncheck2"
                   style={{
-                    color: selected.btn2 ? "white" : "gray",
-                    borderColor: "gray",
+                    color: selected.btn2 ? "white" : "#8EC6E6",
+                    backgroundColor: selected.btn2 ? "#8EC6E6" : "white",
+                    borderColor: "#8EC6E6",
                   }}
                 >
                   여자

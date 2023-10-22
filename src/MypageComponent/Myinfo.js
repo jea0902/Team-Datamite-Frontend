@@ -348,7 +348,7 @@ function Myinfo() {
           <div class="mb-3">
             <input
               type="password"
-              class="form-control"
+              class="form-control password-form"
               id="currentPassword"
               name="currentPassword"
               onChange={onChangePassword}
@@ -394,7 +394,7 @@ function Myinfo() {
                   type="password"
                   name="newPassword"
                   id="newPassword"
-                  className="form-control"
+                  className="form-control password-form"
                 />
                 <div
                   style={{
@@ -429,7 +429,7 @@ function Myinfo() {
                   type="password"
                   name="newPassword2"
                   id="newPassword2"
-                  className="form-control"
+                  className="form-control password-form"
                   style={{ border: isCheck ? "1px solid green" : null }}
                 />
               </div>

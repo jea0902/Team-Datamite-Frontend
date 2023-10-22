@@ -10,11 +10,9 @@ function ImageQuestion() {
   const [selectedFile, setSelectedFile] = useState(null); // 실제 업로드한 파일
   const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
   const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
-  // const KAKAO_API_URL = "https://dapi.kakao.com/v2/search/web";
-  // const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16";
-  // const [namuwikiDescription, setNamuwikiDescription] = useState(null); // API 호출 및 내용 추출 결과를 리액트에서 UI에 업데이트해서 화면에 표시하려면 상태로 관리
 
   const [flipped, setFlipped] = useState(false); // 카드가 뒤집혔는지 상태변수
+  const [isBtnStarted, setIsBtnStarted] = useState(false); // 버튼 클릭 상태값 - 추가 
 
   const diagnosisCases = {
     "전염성 피부질환": "뭐냐 이건 카테고리 아니냐?",
@@ -69,85 +67,68 @@ function ImageQuestion() {
 
   // FAST API로 이미지 파일을 보내고 결과를 받는 로직.
   // 이미지와 같은 파일을 업로드할 때 multipart/form-data 형식을 사용하는 것이 일반적. FormData 객체 사용해서 파일 추가
-  const sendImageToFastAPi = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append("image", file); // image는 백엔드에서 받을 키
+  async function sendImageToFastAPi(event) {
+    event.preventDefault();
 
+    const formData = new FormData();
+    formData.append("imagefile", selectedFile); // image는 백엔드에서 받을 키
+
+    try {
       const response = await axios.post(
         // "http://localhost:8000/api/auth/image_question"
-        "http://3.37.43.105:8000/api/auth/image_question",
+        "http://3.37.43.105:8000/image_question",
         formData,
         {
           headers: {
-            Authorization: accessToken,
             "Content-Type": "multipart/form-data",
           },
         }
       );
       console.log(response.data);
-      setDiagnosisResult(response.data); // 서버로부터 받은 응답(진단결과)을 상태에 저장
-
-      // API 호출이 성공적으로 완료되면 카드를 뒤집는다.
-      setFlipped(true);
+      if (response.status === 200) {
+        setDiagnosisResult(response.data.imageResult); // 서버로부터 받은 응답(진단결과)을 상태에 저장
+        setFlipped(true); // API 호출이 성공적으로 완료되면 카드를 뒤집는다.
+      }
+      
     } catch (error) {
-      setFlipped(true); // 이 부분은 프론트엔드 테스트용으로 추가한 부분이므로 복붙받으면 지우자
       console.error("이미지 업로드 중 에러", error);
     }
   };
 
-  // // 카카오 웹문서 검색 API 호출하는 함수
-  // const searchKakaoAPI = async (query) => {
-  //   try {
-  //     const response = await axios.get(KAKAO_API_URL, {
-  //       headers: {
-  //         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
-  //       },
-  //       params: {
-  //         query: query,
-  //       },
-  //     });
+  async function handleResultClick(event) {
 
-  //     // 나무위키의 결과만 필터링
-  //     const namuwikiResult = response.data.documents.filter((doc) =>
-  //       doc.url.includes("namu.wiki")
-  //     );
-  //     console.log(namuwikiResult);
+    event.preventDefault();
 
-  //     return namuwikiResult;
-  //   } catch (error) {
-  //     console.error("카카오 검색 API 호출 중 에러 :", error);
-  //     console.log("카카오 검색 API 호출 중 에러 :", error);
-  //     return null;
-  //   }
-  // };
+    const formData = new FormData();
+    formData.append("imagefile", selectedFile); // image는 백엔드에서 받을 키
 
-  // // 나무위키 결과에서 "1.개요 뒤 부터 2. 종류전"까지의 내용(텍스트)을 추출하는 함수 - 정의 부분임
-  // const extractNamuwikiContent = (content) => {
-  //   const regex = /1\. 개요([\s\S]*?)(?=2\. 종류)/;
-  //   const match = content.match(regex);
+    try {
+      const response = await axios.post(
+        // "http://localhost:8000/api/auth/image_question"
+        "http://3.37.43.105:8000/image_question",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        setDiagnosisResult(response.data.imageResult); // 서버로부터 받은 응답(진단결과)을 상태에 저장
+        setFlipped(true); // API 호출이 성공적으로 완료되면 카드를 뒤집는다.
+      }
+      
+    } catch (error) {
+      console.error("이미지 업로드 중 에러", error);
+    }
 
-  //   if (match && match[1]) {
-  //     console.log(match[1].trim());
-  //     return match[1].trim(); // 추출한 텍스트의 앞뒤 공백 제거
-  //   }
-  //   console.log("원하는 텍스트 패턴을 못찾았어");
-  //   return null; // 원하는 텍스트 패턴을 찾지 못한 경우 null 반환
-  // };
+    setIsBtnStarted(true);
 
-  // 결과보기 버튼을 클릭했을 때의 핸들함수 (onClick 핸들러) - async 함수 자체는 promise를 반환하며,
-  // 해당 함수를 호출하는 곳에서 그 promise가 완료되기를 기다려주려면 또 다시 await를 사용해 완료를 기다려야 함.
-  const handleResultClick = async () => {
-    await sendImageToFastAPi(selectedFile);
-    // const kakaoResults = await searchKakaoAPI(diagnosis); // diagnosis는 예시
-    // if (kakaoResults && kakaoResults.length > 0) {
-    //   const content = extractNamuwikiContent(kakaoResults[0].contents);
-    //   setNamuwikiDescription(content);
-    // }
   };
 
   useEffect(() => {
-    if (currentIndex < definition.length) {
+    if (isBtnStarted && currentIndex < definition.length) {
       // definition의 모든 글자가 화면에 출력될 때까지 반복
       const timer = setTimeout(() => {
         // 일정 시간 후에 다음 글자를 화면에 추가하는 함수
@@ -157,38 +138,7 @@ function ImageQuestion() {
 
       return () => clearTimeout(timer); // 컴포넌트가 언마운트되거나 currentIndex가 변경되기 전에 setTimeout을 정리
     }
-  }, [currentIndex, definition]);
-
-  // // 네이버 백과사전 검색 API를 호출하는 함수
-  // const searchNaverAPI = async (diagnosis) => {
-  //   const API_URL = "https://cors-anywhere.herokuapp.com/https://openapi.naver.com/v1/search/encyc.json?query=" + diagnosis
-  //   // 네이버 API는 엄격한 CORS 정책을 가지고 있어서 프론트엔드에서만 작업하면서 이 문제를 우회하려면
-  //   // 로컬 프록시 서버를 사용해서 CORS 정책을 우회할 수 있게 해줌 - https://cors-anywhere.herokuapp.com/을 요청 URL 앞에 붙이면 됨.
-  //   // 결과 : 403 forbidden 오류 = 권한이 없거나 API 호출 제한에 도달.
-  //   // **네이버 서버 API가 프록시 서버의 IP도 차단해뒀기에 프론트엔드로만은 API호출이 불가능 - 백엔드에서 API호출이 가장 권장되는 접근법이라고 함.
-  //   const API_ID_KEY = '2AkMHgMhkWAsZ4xXwohY';
-  //   const API_SECRET_KEY = 'MPwn4dQuOb';
-
-  //   try {
-  //   const response = await axios.get(API_URL, {
-  //     headers: {
-  //       "X-Naver-Client-Id": API_ID_KEY,
-  //       "X-Naver-Client-Secret": API_SECRET_KEY
-  //     }
-  //   });
-
-  //   // 필요한 정보 추출
-  //   if (response.data.items && response.data.items.length > 0) {
-  //     const description = response.data.items[0].description; // 첫번째 결과의 description 필드 값을 가져옴
-  //     console.log(description);
-  //     setResultNaverSearch(description);
-  //     return description;
-  //   }
-  // } catch (error) {
-  //   console.error("네이버 검색 API 사용중 error :",error)
-  // }
-
-  // }
+  }, [currentIndex, definition, isBtnStarted]);
 
   return (
     <div
@@ -262,7 +212,6 @@ function ImageQuestion() {
               marginTop: "2vh",
             }}
           >
-            아직은 학습용 데이터가 부족하지만, <br />
             아래 파일선택을 클릭하셔서 사진을 올려주시면 분석해서
             진단해보겠습니다.
           </div>
@@ -279,7 +228,7 @@ function ImageQuestion() {
               <div className="input-group mb-3">
                 <input
                   type="file"
-                  className="form-control"
+                  className="form-control form-control-lg"
                   id="inputGroupFile"
                   onChange={handleFileUpload}
                 />
@@ -306,7 +255,7 @@ function ImageQuestion() {
             <br />
             <br />
             <br />
-            이곳에 드래그 하셔도 파일 업로드가 가능해요!
+            {!imagePreview && "이곳에 드래그 하셔도 파일 업로드가 가능해요!"}
           </div>
 
           <div className="resultButton" style={{ paddingBottom: "20px" }}>
@@ -314,7 +263,7 @@ function ImageQuestion() {
               variant="contained"
               color="primary"
               onClick={handleResultClick} // 실제 파일 객체를 전달
-              style={{ marginTop: "20px", backgroundColor: "#8EC6E6" }}
+              style={{ marginTop: "20px", backgroundColor: "#8EC6E6", fontFamily: "BMJUA" }}
             >
               결과보기
             </Button>
@@ -370,8 +319,6 @@ function ImageQuestion() {
             }}
           >
             {diagnosisResult?.description || diagnosis}이란? :{displayText}
-            {/* {namuwikiDescription} */}
-            {/* description이라는 필드명을 사용했다는 가정, 여기는 사람이 글을 써내려가듯이 or 챗지피티가 써내려가듯이 */}
           </div>
 
           <div

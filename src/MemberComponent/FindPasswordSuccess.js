@@ -124,7 +124,7 @@ function FindPasswordSuccess() {
                 type="password"
                 name="password"
                 id="password"
-                className="form-control input-icon-placeholder2"
+                className="form-control password-form input-icon-placeholder2"
               />
               <div
                 style={{
@@ -159,7 +159,7 @@ function FindPasswordSuccess() {
                 type="password"
                 name="password2"
                 id="password2"
-                className="form-control input-icon-placeholder2"
+                className="form-control password-form input-icon-placeholder2"
                 style={{ border: isCheck ? "1px solid green" : null }}
               />
             </div>
