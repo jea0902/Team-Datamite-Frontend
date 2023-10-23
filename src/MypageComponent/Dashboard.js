@@ -56,7 +56,7 @@ function Dashboard() {
                                 <div className="card-body" style={{minHeight: "365px"}}>
                                     <div>
                                         <iframe
-                                            src="https://prod-apnortheast-a.online.tableau.com/t/xn3j1ba317uba/views/Dashboard/1?:origin=card_share_link&:&showVizHome=no&:embed=true"
+                                            src="https://prod-apnortheast-a.online.tableau.com/t/xn3j1ba317uba/views/Dashboard_mac/1?:origin=card_share_link&:&showVizHome=no&:embed=true"
                                             width="90%"
                                             height="500"
                                             // height="850"

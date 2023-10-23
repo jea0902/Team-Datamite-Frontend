@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import 배경 from "../src/assets/image/background.jpg";
-import 태블로 from "../src/assets/image/tableau.png";
-import 태블로2 from "../src/assets/image/tableau2.png";
+import 대시보드페이지 from "../src/assets/image/DashboardPage.png";
+import 챗봇페이지 from "../src/assets/image/chatPageBackground.png";
 import "./css/styles.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -69,14 +69,14 @@ function Main() {
       </Button>
 
       <img
-        src={태블로2}
+        src={챗봇페이지}
         alt="picture"
         onClick={() => handleImageClick("img1")}
         style={{
           position: "absolute",
           top: "20vh",
           left: "45vw",
-          width: "35vw",
+          width: "40vw",
           height: "350px",
           borderRadius: "25px",
           zIndex: activeImage === "img2" ? 3 : 2,
@@ -85,7 +85,7 @@ function Main() {
         }}
       />
       <img
-        src={태블로}
+        src={대시보드페이지}
         alt="picture"
         onClick={() => handleImageClick("img2")}
         style={{
@@ -93,7 +93,7 @@ function Main() {
           top: "25vh",
           left: "55vw",
           width: "35vw",
-          height: "350px",
+          height: "400px",
           borderRadius: "25px",
           zIndex: activeImage === "img1" ? 3 : 2,
           transform: activeImage === "img1" ? "scale(1.05)" : "scale(1)",

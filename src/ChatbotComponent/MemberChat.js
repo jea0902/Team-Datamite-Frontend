@@ -366,7 +366,8 @@ function MemberChat() {
 
     try {
         const response = await axios.post(
-            'http://localhost:8080/api/save/chat',
+            // 'http://localhost:8080/api/save/chat',
+            'http://3.37.43.105:8080/api/save/chat',
             saveMessages
             ,
             {

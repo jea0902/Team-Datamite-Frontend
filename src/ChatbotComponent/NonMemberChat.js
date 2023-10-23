@@ -351,25 +351,25 @@ function NonMemberChat() {
     // 채팅 종료 함수
     console.log(saveMessages);
 
-    // try {
-    //   const response = await axios.post(
-    //     // "http://localhost:8080/api/save/chat",
-    //     "http://3.37.43.105:8080/api/save/chat",
-    //     saveMessages,
-    //     {
-    //       headers: {
-    //         Authorization: "",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
+    try {
+      const response = await axios.post(
+        // "http://localhost:8080/api/save/chat",
+        'http://3.37.43.105:8080/api/save/chat',
+        saveMessages,
+        {
+          headers: {
+            Authorization: "",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    //   if (response.status === 200) {
-    //     console.log(response.data);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      if (response.status === 200) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // 입력 필드 값 변경 처리 함수

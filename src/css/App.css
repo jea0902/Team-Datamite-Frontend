@@ -19,11 +19,6 @@
 }
 
 @font-face {
-  font-family: "AppleNeo";
-  src: url("../assets/font/AppleSDGothicNeoB.ttf");
-}
-
-@font-face {
   font-family: "NOTO-SemiBold";
   src: url("../assets/font/NotoSansKR-SemiBold.ttf");
 }
@@ -31,14 +26,6 @@
 body {
   font-family: "BMJUA";
 }
-
-/* body {
-  font-family: "AppleNeo";
-} */
-
-/* body {
-  font-family: "NOTOEXTRA";
-} */
 
 .container-fluid {
   font-family: "NOTOEXTRA";
@@ -53,8 +40,6 @@ body {
 }
 
 .chat-card {
-  /* 세은이에게 이거 카드 폰트 바꿔도 되는지 물어볼 것. 10-19 */
-  /* font-family: "BMJUA"; */
   font-family: "NOTO-SemiBold";
 }
 
