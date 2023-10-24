@@ -158,13 +158,27 @@ function MemberChat() {
 
         setIsLoading(true);
         if (firstProbability >= 0.8) {
-          addServerMessage(firstServerResponse.speciality); // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
+          addServerMessage(
+            `이런 증상일 경우에는 ${firstServerResponse.speciality}을(를) 추천드려요.`
+          ); // 이 함수가 완료되면 userMessageIdCounter = 1 , serverMessageIdCounter = 4
 
+          // 피부과라면 이미지로 분석하기 페이지로 가실건지 링크와 함께 메시징
+          if (firstServerResponse.speciality === "피부과") {
+            addServerMessage(
+              "더 정확한 진단명을 알고싶으시다면, 이미지로 분석할 수 있는 페이지로 가보시겠어요?"
+            );
+            // 링크박스 추가
+            addServerMessage(
+              <a href="/ask-image">이미지로 분석하기 페이지로 이동</a>
+            );
+          }
           setIsLoading(true);
 
           if (firstServerResponse.diseases.length > 0) {
             let disease_top3 = firstServerResponse.diseases.join(", "); // 배열의 항목을 쉼표로 구분한 문자열로 결합
-            addServerMessage(disease_top3);
+            addServerMessage(
+              `예상 질환명으로는 ${disease_top3} 등이 있어요. 해당 결과가 정확하지 않을 수도 있으니 반드시 의료기관에 방문하여 의사와 상담하시길 바랍니다.`
+            );
           }
 
           setResultSpeciality(firstServerResponse.speciality);
@@ -306,6 +320,16 @@ function MemberChat() {
 
   function addServerMessage(arg) {
     console.log(serverMessageIdCounter);
+    // React 컴포넌트나 JSX도 받아들일 수 있게 변경하기 위함(테스트)
+    let content;
+
+    if (typeof arg === "string") {
+      content = arg;
+    } else {
+      // arg가 React 컴포넌트나 JSX일 경우
+      content = React.cloneElement(arg, { key: "unique_key" }); // React 요소에 키를 추가
+    }
+
     setMessages((prevMessages) => [
       ...prevMessages,
       {
@@ -313,7 +337,7 @@ function MemberChat() {
           prevMessages.length > 0
             ? prevMessages[prevMessages.length - 1].id + 1
             : 0,
-        content: arg,
+        content: content, // content로 수정
         messageType: false,
         timestamp: new Date(),
       }, // false = 서버

@@ -74,79 +74,79 @@ function Navbar() {
           </button>
           <div
             className="offcanvas offcanvas-end"
-            tabindex="-1"
+            tabIndex="-1"
             id="offcanvasNavbar"
             aria-labelledby="offcanvasNavbarLabel"
           >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                Offcanvas
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+                메뉴
               </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-sm-evenly flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/chat">
+            <div className="offcanvas-body">
+              <ul className="navbar-nav justify-content-sm-evenly flex-grow-1 pe-3">
+                <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href="/chat">
                     챗봇
                   </a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <a
-                    class="nav-link"
+                    className="nav-link"
                     href="/ask-image"
                     // style={{marginRight:"100px", marginLeft:"100px"}}
                   >
                     사진으로 물어보기
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/qna">
+                <li className="nav-item">
+                  <a className="nav-link" href="/qna">
                     문의하기
                   </a>
                 </li>
               </ul>
 
               {isLogin && userData.name !== "" ? (
-                <ul class="navbar-nav">
-                  <li class="nav-item dropdown">
+                <ul className="navbar-nav">
+                  <li className="nav-item dropdown">
                     <a
-                      class="nav-link dropdown-toggle"
+                      className="nav-link dropdown-toggle"
                       href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <i class="bi bi-person-fill"></i> {userData.name}
+                      <i className="bi bi-person-fill"></i> {userData.name}
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul className="dropdown-menu">
                       <li>
-                        <a class="dropdown-item" href="/mypage">
-                          <i class="bi bi-person-circle"></i> 프로필
+                        <a className="dropdown-item" href="/mypage">
+                          <i className="bi bi-person-circle"></i> 프로필
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="#">
-                          <i class="bi bi-chat-dots"></i> 채팅 기록
+                        <a className="dropdown-item" href="#">
+                          <i className="bi bi-chat-dots"></i> 채팅 기록
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="#">
-                          <i class="bi bi-graph-up"></i> 대시보드
+                        <a className="dropdown-item" href="#">
+                          <i className="bi bi-graph-up"></i> 대시보드
                         </a>
                       </li>
                       <li>
-                        <hr class="dropdown-divider" />
+                        <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <a class="dropdown-item" onClick={handleLogout}>
+                        <a className="dropdown-item" onClick={handleLogout}>
                           <i
-                            class="bi bi-power"
+                            className="bi bi-power"
                             style={{ fontWeight: "bold" }}
                           ></i>{" "}
                           로그아웃
@@ -156,9 +156,9 @@ function Navbar() {
                   </li>
                 </ul>
               ) : (
-                <div class="d-flex">
-                  <div class="p-2 text-center">
-                    <a class="dropdown-item" href="/login">
+                <div className="d-flex">
+                  <div className="p-2 text-center">
+                    <a className="dropdown-item" href="/login">
                       로그인
                     </a>
                   </div>

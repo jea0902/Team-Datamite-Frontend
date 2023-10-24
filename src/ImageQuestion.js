@@ -10,9 +10,6 @@ function ImageQuestion() {
   const [selectedFile, setSelectedFile] = useState(null); // 실제 업로드한 파일
   const accessToken = window.localStorage.getItem("AccessToken"); // 액세스 토큰 가져오기
   const [diagnosisResult, setDiagnosisResult] = useState(null); // 서버로부터 받은 진단 결과를 저장하기 위한 상태
-  // const KAKAO_API_URL = "https://dapi.kakao.com/v2/search/web";
-  // const KAKAO_API_KEY = "71eb4c99656818b53b7557c13c716e16";
-  // const [namuwikiDescription, setNamuwikiDescription] = useState(null); // API 호출 및 내용 추출 결과를 리액트에서 UI에 업데이트해서 화면에 표시하려면 상태로 관리
 
   const [flipped, setFlipped] = useState(false); // 카드가 뒤집혔는지 상태변수
 
@@ -37,6 +34,8 @@ function ImageQuestion() {
 
   const [displayText, setDisplayText] = useState(""); // 현재 화면에 표시할 텍스트를 저장하는 상태
   const [currentIndex, setCurrentIndex] = useState(0); // definition 문자열에서 현재 어디까지 읽었는지 인덱스를 저장하는 상태
+
+  const [isBtnStarted, setIsBtnStarted] = useState(false); // 버튼 클릭 상태값
 
   // 파일 업로드 핸들러
   const handleFileUpload = (e) => {
@@ -91,7 +90,6 @@ function ImageQuestion() {
       // API 호출이 성공적으로 완료되면 카드를 뒤집는다.
       setFlipped(true);
     } catch (error) {
-      setFlipped(true); // 이 부분은 프론트엔드 테스트용으로 추가한 부분이므로 복붙받으면 지우자
       console.error("이미지 업로드 중 에러", error);
     }
   };
@@ -139,6 +137,7 @@ function ImageQuestion() {
   // 해당 함수를 호출하는 곳에서 그 promise가 완료되기를 기다려주려면 또 다시 await를 사용해 완료를 기다려야 함.
   const handleResultClick = async () => {
     await sendImageToFastAPi(selectedFile);
+    setIsBtnStarted(true);
     // const kakaoResults = await searchKakaoAPI(diagnosis); // diagnosis는 예시
     // if (kakaoResults && kakaoResults.length > 0) {
     //   const content = extractNamuwikiContent(kakaoResults[0].contents);
@@ -147,7 +146,7 @@ function ImageQuestion() {
   };
 
   useEffect(() => {
-    if (currentIndex < definition.length) {
+    if (isBtnStarted && currentIndex < definition.length) {
       // definition의 모든 글자가 화면에 출력될 때까지 반복
       const timer = setTimeout(() => {
         // 일정 시간 후에 다음 글자를 화면에 추가하는 함수
@@ -157,7 +156,7 @@ function ImageQuestion() {
 
       return () => clearTimeout(timer); // 컴포넌트가 언마운트되거나 currentIndex가 변경되기 전에 setTimeout을 정리
     }
-  }, [currentIndex, definition]);
+  }, [currentIndex, definition, isBtnStarted]);
 
   // // 네이버 백과사전 검색 API를 호출하는 함수
   // const searchNaverAPI = async (diagnosis) => {
@@ -262,7 +261,6 @@ function ImageQuestion() {
               marginTop: "2vh",
             }}
           >
-            아직은 학습용 데이터가 부족하지만, <br />
             아래 파일선택을 클릭하셔서 사진을 올려주시면 분석해서
             진단해보겠습니다.
           </div>
