@@ -1,7 +1,6 @@
 @font-face {
   font-family: "BMJUA";
   src: url("../assets/font/BMJUA_TTF.TTF") format("truetype");
-  /* 다른 포맷(woff, woff2, eot 등)도 지원하면 추가할 수 있습니다. */
 }
 
 @font-face {
@@ -12,6 +11,16 @@
 @font-face {
   font-family: "NOTOEXTRA";
   src: url("../assets/font/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "JALNAN";
+  src: url("../assets/font/JALNAN.TTF") format("truetype");
+}
+
+@font-face {
+  font-family: "NOTO-SemiBold";
+  src: url("../assets/font/NotoSansKR-SemiBold.ttf");
 }
 
 body {
@@ -26,8 +35,14 @@ body {
   font-family: "NOTOSANS";
 }
 
-
-
 .QnA-Box {
   font-family: "BMJUA";
+}
+
+.chat-card {
+  font-family: "NOTO-SemiBold";
+}
+
+.navbar-brand {
+  font-family: "JALNAN";
 }

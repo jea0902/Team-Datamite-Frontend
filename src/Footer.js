@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="footer" style={{ display: "flex" }}>
+    <div className="footer" style={{ display: "flex"}}>
       <div style={{ ...styles.footerContainer, flex: 7 }}>
         <p style={{ fontSize: "15px" }}>
           <strong>데이터마이트 주식회사</strong>
@@ -39,11 +39,11 @@ export default function Footer() {
 const styles = {
   footerContainer: {
     backgroundColor: "#463c3c",
-    padding: "20px 0",
+    padding: "8px 0 0",
     textAlign: "left", // 텍스트 중앙 정렬
     color: "white",
     fontSize: "12px",
-    paddingLeft: "150px",
+    paddingLeft: "100px",
     position: "relative", // 상위 엘리먼트를 기준으로 위치 설정
     bottom: 0, // 하단에 고정
     width: "100%",

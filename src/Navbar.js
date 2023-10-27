@@ -16,7 +16,8 @@ function Navbar() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/logout",
+        // "http://localhost:8080/api/auth/logout"
+        "http://3.37.43.105:8080/api/auth/logout",
 
         null,
         {
@@ -71,47 +72,97 @@ function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div
+            className="offcanvas offcanvas-end"
+            tabIndex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+                토닥토닥
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
             </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-sm-evenly flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/chat">챗봇</a>
+            <div className="offcanvas-body">
+              <ul className="navbar-nav justify-content-sm-evenly flex-grow-1 pe-3">
+                <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href="/chat">
+                    챗봇
+                  </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ask/image"
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    href="/ask-image"
                   // style={{marginRight:"100px", marginLeft:"100px"}}
-                  >사진으로 물어보기</a>
+                  >
+                    사진으로 물어보기
+                  </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/ask/image">문의하기</a>
+                <li className="nav-item">
+                  <a className="nav-link" href="/qna">
+                    문의하기
+                  </a>
                 </li>
               </ul>
 
-              {isLogin && userData.name !== '' ? (
-                <ul class="navbar-nav">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-person-fill"></i> {userData.name}
+              {isLogin && userData.name !== "" ? (
+                <ul className="navbar-nav">
+                  <li className="nav-item dropdown">
+                    <a
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i className="bi bi-person-fill"></i> {userData.name}
                     </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i>  Profile</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="bi bi-chat-dots"></i>  Chat History</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up"></i>  Dashboard</a></li>
+                    <ul className="dropdown-menu">
+                      <li><h3 className="dropdown-header">마이페이지</h3></li>
                       <li>
-                        <hr class="dropdown-divider" />
+                        <a className="dropdown-item" href="/profile">
+                          <i className="bi bi-person-circle"></i> 프로필
+                        </a>
                       </li>
-                      <li><a class="dropdown-item" onClick={handleLogout}><i class="bi bi-power" style={{fontWeight: 'bold'}}></i> Log out</a></li>
+                      <li>
+                        <a className="dropdown-item" href="/chat-history">
+                          <i className="bi bi-chat-dots"></i> 채팅 기록
+                        </a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/dashboard">
+                          <i className="bi bi-graph-up"></i> 대시보드
+                        </a>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a className="dropdown-item" onClick={handleLogout}>
+                          <i
+                            className="bi bi-power"
+                            style={{ fontWeight: "bold" }}
+                          ></i>{" "}
+                          로그아웃
+                        </a>
+                      </li>
                     </ul>
                   </li>
                 </ul>
               ) : (
-                <div class="d-flex">
-                  <div class="p-2 text-center">
-                    <a class="dropdown-item" href="/login">로그인</a></div>
+                <div className="d-flex">
+                  <div className="p-2 text-center">
+                    <a className="dropdown-item" href="/login">
+                      로그인
+                    </a>
+                  </div>
                 </div>
               )}
             </div>

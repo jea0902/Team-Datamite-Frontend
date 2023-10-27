@@ -4,11 +4,11 @@
     margin-bottom: auto;
 }
 
-/* 사용 (바꿔야 함)*/
+/* 사용 (바꿔야 함)
 .card {
     height: 700px;
     border-radius: 15px !important;
-}
+} */
 
 .contacts_body {
     padding: 0.75rem 0 !important;
@@ -135,7 +135,7 @@
 
 .map_body {
     /* padding: 0.90rem 0 !important; */
-    height: 695px;
+    height: 701px;
     overflow-y: auto;
     white-space: nowrap;
 }

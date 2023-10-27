@@ -1,8 +1,86 @@
-.chatRow {
-  transition: background-color 0.3s;
-  /* 부드러운 전환효과 */
+.pagination li a.page-link {
+    color: #8EC6E6;
 }
 
-/* .chatRow:hover td {
-  background-color: lightblue !important;
-} */
+.pagination li a.page-link:hover,
+.pagination li a.page-link:focus,
+.pagination li.active a.page-link:hover,
+.pagination li.active a.page-link {
+    color: #fff;
+    background: #8EC6E6;
+    border-color: #8EC6E6;
+}
+
+table.table>tbody>tr:hover td,
+table.table>tbody>tr:hover th {
+    background-color: #eff4f8 !important;
+}
+
+.member_btn {
+    /* border-radius: 0 15px 15px 0 !important; */
+    border-color: #8EC6E6 !important;
+    background-color: white !important;
+    color: #8EC6E6 !important;
+    cursor: pointer;
+}
+
+.member_btn:hover {
+    color: white !important;
+    background-color: #8EC6E6 !important;
+}
+
+.modal_btn {
+    border-color: #8EC6E6 !important;
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+.modal_btn:hover {
+    border-color: #7aa6c0 !important;
+    background-color: #7aa6c0 !important;
+}
+
+.usual_btn {
+    border-color: none !important;
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+.usual_btn:hover {
+    border-color: #7aa6c0 !important;
+    background-color: #7aa6c0 !important;
+}
+
+.list-group .list-group-item-action.active {
+    border: none;
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+ul.dropdown-menu>li>a:focus {
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+ul.dropdown-menu>li>a:hover {
+    background-color: #8EC6E6 !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+
+/* placeholder의 스타일 */
+.password-form::placeholder {
+    font-family: "BMJUA" !important;
+    align-items: center;
+}
+
+.password-form {
+    font-family: "NOTOSANS" !important;
+    color: #000 !important;
+    align-items: center !important;
+}
