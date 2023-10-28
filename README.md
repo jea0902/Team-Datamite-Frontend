@@ -6,8 +6,8 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 ## 기여자(Contributors)✨
 [![최재혁](https://avatars.githubusercontent.com/u/62950552?v=4)](https://github.com/jea0902)
-[![안현주]()]()
-[![윤지훈]()]()
+[![안현주](https://avatars.githubusercontent.com/u/132975657?v=4)](https://github.com/AhnHz)
+[![윤지훈](https://avatars.githubusercontent.com/u/134353451?v=4)](https://github.com/YoonJJuny)
 [![심세은]()]()
 [![이영직]()]()
 
