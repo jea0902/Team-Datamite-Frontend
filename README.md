@@ -1,4 +1,4 @@
-## Final_Web_Service_PJ_2023-10-24
+# PLAYDATA_TEAM_DATAMITE_Final_Web_Service_PJ_2023-10-24
 
 ## 프로젝트 개요
 ![1](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/b4f99ad0-3ab2-49f0-84c6-52713c08e5c6)
