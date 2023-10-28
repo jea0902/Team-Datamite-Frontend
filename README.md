@@ -1,5 +1,7 @@
 # PLAYDATA_TEAM_DATAMITE_Final_Web_Project
 
+<br /><br />
+
 ## 프로젝트 개요
 ![1](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/b4f99ad0-3ab2-49f0-84c6-52713c08e5c6)
 https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf
@@ -21,7 +23,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 ### 프로젝트 기간
 ### 2023.8.1 ~ 2023.10.24
-![토닥토닥 WBS](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/59e5acb6-e04c-4d86-910a-77652204f52f)
+![토닥토닥 WBS](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/e5dc25f9-5cce-44a0-a6f7-0d38edf8d46e)
 
 
 <br /><br />
@@ -33,7 +35,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - [서비스 기획 배경](#서비스-기획-배경)
 - [프로젝트 핵심 요약](#프로젝트-핵심-요약)
 - [사용한 데이터](#사용한-데이터)
-- [프로젝트 정리 PDF 파일](#프로젝트-정리-PDF-파일)
+- [프로젝트 정리](#프로젝트-정리)
 - [프로젝트 회고](#프로젝트-회고)
 
 <br /><br />
@@ -47,22 +49,22 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 ### [기술 스택](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/technical_stack_only.pdf)
 (상세히 보시려면 기술스택 링크를 클릭해주세요)
 
-- 프론트엔드 <br />
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"><img src="https://img.shields.io/badge/kakao-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white"><img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+프론트엔드 <br />
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"><img src="https://img.shields.io/badge/kakao-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><br /><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white"><img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 
-- 백엔드 <br />
-<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"><img src="https://img.shields.io/badge/jsonwebtokens-5586A4?style=for-the-badge&logo=jsonwebtokens&logoColor=white"><img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"><img src="https://img.shields.io/badge/fastapi-FF282D?style=for-the-badge&logo=fastapi&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white">
+백엔드 <br />
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"><img src="https://img.shields.io/badge/jsonwebtokens-5586A4?style=for-the-badge&logo=jsonwebtokens&logoColor=white"><img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"><br /><img src="https://img.shields.io/badge/fastapi-FF282D?style=for-the-badge&logo=fastapi&logoColor=white"><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"><img src="https://img.shields.io/badge/gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white">
 
-- 데이터 엔지니어링 <br />
-<img src="https://img.shields.io/badge/apachespark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white"><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"><img src="https://img.shields.io/badge/apacheairflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white"><img src="https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy&logoColor=white"><img src="https://img.shields.io/badge/amazon S3-FF9900?style=for-the-badge&logo=amazon&logoColor=white"><img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+데이터 엔지니어링 <br />
+<img src="https://img.shields.io/badge/apachespark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white"><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"><img src="https://img.shields.io/badge/apacheairflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white"><img src="https://img.shields.io/badge/numpy-013243?style=for-the-badge&logo=numpy&logoColor=white"><br /><img src="https://img.shields.io/badge/amazon S3-FF9900?style=for-the-badge&logo=amazon&logoColor=white"><img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
 
-- 데이터 분석 <br />
-<img src="https://img.shields.io/badge/tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white"><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"><img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"><img src="https://img.shields.io/badge/scikitlearn-149EF2?style=for-the-badge&logo=scikitlearn&logoColor=white"><img src="https://img.shields.io/badge/selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white"><img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+데이터 분석 <br />
+<img src="https://img.shields.io/badge/tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white"><img src="https://img.shields.io/badge/pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"><img src="https://img.shields.io/badge/tensorflow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"><img src="https://img.shields.io/badge/scikitlearn-149EF2?style=for-the-badge&logo=scikitlearn&logoColor=white"><br /><img src="https://img.shields.io/badge/selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white"><img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
 
 <br /><br />
 
 ### [프론트엔드 핵심 스킬]()
-(상세하게 보시려면 프론트엔드 핵심 스킬 링크를 클릭해주세요)
+(상세하게 보시려면 프론트엔드 핵심 스킬 링크를 클릭해주세요) - 이거 집에서 페이지 찍거나 시연영상이라도 찍어서 or 애들한테 있는지 물어봐서 넣기 gitHub에
 #### 메인기능
 - 챗봇 커스텀 디자인 사용
 - 카카오 지도 API 사용 및 커스텀 디자인 사용
@@ -117,7 +119,8 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 <br /><br />
 
-### [프로젝트 정리 PDF 파일](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf)
+### [프로젝트 정리](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf)
+(상세히 보시려면 링크를 클릭해주세요)
 
 <br /><br />
 
