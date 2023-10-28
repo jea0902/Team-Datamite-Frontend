@@ -9,11 +9,11 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 ## 기여자(Contributors)✨
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/jea0902"><img src="https://avatars.githubusercontent.com/u/62950552?v=4" width="100px;" alt=""><br /><sub><b>최재혁</b>><b>프론트엔드</b></sub></td>
-    <td align="center"><a href="https://github.com/AhnHz"><img src="https://avatars.githubusercontent.com/u/132975657?v=4" width="100px;" alt=""><br /><sub><b>안현주</b></sub></td>
-    <td align="center"><a href="https://github.com/YoonJJuny"><img src="https://avatars.githubusercontent.com/u/134353451?v=4" width="100px;" alt=""><br /><sub><b>윤지훈</b></sub></td>
-    <td align="center"><a href="https://github.com/sennee"><img src="https://avatars.githubusercontent.com/u/137972957?v=4" width="100px;" alt=""><br /><sub><b>심세은</b></sub></td>
-    <td align="center"><a href="https://github.com/lee-young-jik"><img src="https://avatars.githubusercontent.com/u/91588673?v=4" width="100px;" alt=""><br /><sub><b>이영직</b></sub></td>
+    <td align="center"><a href="https://github.com/jea0902"><img src="https://avatars.githubusercontent.com/u/62950552?v=4" width="110px;" alt=""><br /><sub><b>최재혁</b> <br /> <b>(프론트엔드)</b></sub></td>
+    <td align="center"><a href="https://github.com/AhnHz"><img src="https://avatars.githubusercontent.com/u/132975657?v=4" width="110px;" alt=""><br /><sub><b>안현주</b> <br /> <b>(데이터 분석)</b></sub></td>
+    <td align="center"><a href="https://github.com/YoonJJuny"><img src="https://avatars.githubusercontent.com/u/134353451?v=4" width="110px;" alt=""><br /><sub><b>윤지훈</b> <br /> <b>(데이터 분석)</b></sub></td>
+    <td align="center"><a href="https://github.com/sennee"><img src="https://avatars.githubusercontent.com/u/137972957?v=4" width="110px;" alt=""><br /><sub><b>심세은</b> <br /> <b>(풀스택)</b></sub></td>
+    <td align="center"><a href="https://github.com/lee-young-jik"><img src="https://avatars.githubusercontent.com/u/91588673?v=4" width="120px;" alt=""><br /><sub><b>이영직</b> <br /> <b>(데이터 엔지니어링)</b></sub></td>
   </tr>
 </table>
 
@@ -34,7 +34,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - [프로젝트 핵심 요약](#프로젝트-핵심-요약)
 - [사용한 데이터](#사용한-데이터)
 - [프로젝트 정리 PDF 파일](#프로젝트-정리-PDF-파일)
-- [프로젝트 직무별 회고](#프로젝트-직무별-회고)
+- [프로젝트 회고](#프로젝트-회고)
 
 <br /><br />
 
@@ -121,12 +121,12 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 <br /><br />
 
-### 프로젝트 직무별 회고
-- 프론트엔드 최재혁:
-- 데이터 분석 안현주:
-- 데이터 분석 윤지훈:
-- 백엔드, 프론트엔드 심세은:
-- 데이터 엔지니어링 이영직:
+### 프로젝트 회고
+- 최재혁: 회고할 떄, velog나 tistory 주소 갖다넣기
+- 안현주:
+- 윤지훈:
+- 심세은:
+- 이영직:
 
 
 
