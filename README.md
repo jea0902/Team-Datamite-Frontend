@@ -69,7 +69,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - 챗봇 커스텀 디자인 사용
 - 카카오 지도 API 사용 및 커스텀 디자인 사용
 - 이미지 분석 페이지
-- 태블로를 사용한 본석 페이지
+- 태블로를 사용한 분석 페이지
 - 사용자 친화적이고, 세련된 UI 디자인
 
 #### 기본 기능
