@@ -126,8 +126,8 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 <br /><br />
 
 ### 프로젝트 회고
-- 팀 회고록 : [https://www.notion.so/9788325e0cff4c80af3028698c778cc6](https://www.notion.so/9788325e0cff4c80af3028698c778cc6)
 - 개인 회고록 : [https://www.notion.so/9788325e0cff4c80af3028698c778cc6](https://www.notion.so/9788325e0cff4c80af3028698c778cc6)
+- 팀 회고록 : [https://www.notion.so/9788325e0cff4c80af3028698c778cc6](https://www.notion.so/9788325e0cff4c80af3028698c778cc6)
 
 
 
