@@ -135,11 +135,18 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - 사용자가 증상만 자연어로 챗봇에 입력하면 ➝ 그 증상에 대한 진료과와 예상 진단명을 매칭해주고, 진료과에 해당하는 주변 병원들을 카카오 지도로 정보를 제공합니다.
 - 각 병원들을 클릭하면 그 병원의 리뷰와 리뷰 분석을 통한 ➝  리뷰 키워드를 비롯해 거리, 전화번호, 진료시간 등 기본정보도 같이 보여줍니다.
 - 이 모든 기능이 한 페이지 안에서 짧은 시간 안에 이루어지기에 사용자 친화적입니다.
+![챗봇맵](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/fd8a72a0-f0b8-4746-bcfd-70c731c70734)
+
 #### 이미지 분석 기능
 - 사용자가 피부 사진을 찍어 업로드하면 ➝ 사진을 특정 피부질환에 분류하여 진단 결과를 제공합니다.
+![이미지분석](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/3de12e0f-53c4-47f0-aa1f-e83adc7a21f3)
+
 #### 마이페이지 기능
 - 회원가입을 한 회원들은 챗봇을 사용한 이력을 저장하고, 채팅 기록을 당시 챗봇 UI 그대로 볼 수 있습니다.
+![마이페이지](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/8ab768b4-d8b8-474c-bc41-c503ae3e4f3a)
 - 태블로를 활용해 대시보드 페이지를 만들어, 질문 건수와 회원 수, 성비, 연도별 질문 건수, 진료과 별 질문 건수, 계절별 진료과 수, 전국지도 지역별 진료과 비율, 리뷰 긍/부정 비율 등 다양한 정보를 한 페이지에서 제공합니다.
+![태블로](https://github.com/jea0902/Team-Datamite-Frontend/assets/62950552/b7191613-c3c0-47f2-afd4-5a0616e8c1f7)
+
 
 <br /><br />
 
