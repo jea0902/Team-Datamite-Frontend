@@ -11,7 +11,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 ## 기여자(Contributors)✨
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/jea0902"><img src="https://avatars.githubusercontent.com/u/62950552?v=4" width="110px;" alt=""><br /><sub><b>최재혁</b> <br /> <b>(프론트엔드)</b></sub></td>
+    <td align="center"><a href="https://github.com/jea0902"><img src="https://avatars.githubusercontent.com/u/62950552?v=4" width="110px;" alt=""><br /><sub><b>최재혁(본인)</b> <br /> <b>(프론트엔드)</b></sub></td>
     <td align="center"><a href="https://github.com/AhnHz"><img src="https://avatars.githubusercontent.com/u/132975657?v=4" width="110px;" alt=""><br /><sub><b>안현주</b> <br /> <b>(데이터 분석)</b></sub></td>
     <td align="center"><a href="https://github.com/YoonJJuny"><img src="https://avatars.githubusercontent.com/u/134353451?v=4" width="110px;" alt=""><br /><sub><b>윤지훈</b> <br /> <b>(데이터 분석)</b></sub></td>
     <td align="center"><a href="https://github.com/sennee"><img src="https://avatars.githubusercontent.com/u/137972957?v=4" width="110px;" alt=""><br /><sub><b>심세은</b> <br /> <b>(풀스택)</b></sub></td>
@@ -151,8 +151,16 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 <br /><br />
 
-### [프로젝트 정리](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf)
+### [프로젝트 PPT](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf)
 (상세히 보시려면 링크를 클릭해주세요)
+
+<br /><br />
+
+### [프로젝트 노션](https://www.notion.so/DataMite-904483e5a15645e3b15b417dde2e7f54)
+
+<br /><br />
+
+### [프로젝트 시연 영상](https://www.youtube.com/watch?v=n0ynZqmpSaI)
 
 <br /><br />
 
