@@ -37,8 +37,6 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - [프로젝트 목표](#프로젝트-목표)
 - [프로젝트 핵심 요약](#프로젝트-핵심-요약)
 - [주요 기능](#주요-기능)
-- [사용한 데이터](#사용한-데이터)
-- [프로젝트 정리](#프로젝트-정리)
 - [프로젝트 회고](#프로젝트-회고)
 
 <br /><br />
@@ -52,7 +50,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 ### [기술 스택](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/technical_stack_only.pdf)
 (상세히 보시려면 기술스택 링크를 클릭해주세요)
 
-프론트엔드 <br />
+프론트엔드* <br />
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"><img src="https://img.shields.io/badge/kakao-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><br /><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white"><img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 
 백엔드 <br />
@@ -66,8 +64,7 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 <br /><br />
 
-### [프론트엔드 핵심 스킬]()
-(상세하게 보시려면 프론트엔드 핵심 스킬 링크를 클릭해주세요)
+### [프론트엔드 핵심 스킬]
 
 #### 메인기능
 - 챗봇 커스텀 디자인 사용
@@ -151,14 +148,6 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 
 <br /><br />
 
-### 사용한 데이터
-- 네이버 지식인 질문
-- 진료과 별 병원 정보(모두닥 어플)
-- 질문 별 상담자료집(심평원)
-- 피부 질환 이미지(Kaggle)
-
-<br /><br />
-
 ### [프로젝트 PPT](https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%8D%B0%EC%9D%B4%ED%84%B0_%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%ED%86%A0%EB%8B%A5%ED%86%A0%EB%8B%A5%20ppt.pdf)
 (상세히 보시려면 링크를 클릭해주세요)
 
@@ -176,6 +165,13 @@ https://github.com/jea0902/Team-Datamite-Frontend/blob/main/%ED%94%8C%EB%A0%88%E
 - 개인 회고록 : [https://www.notion.so/9788325e0cff4c80af3028698c778cc6](https://www.notion.so/9788325e0cff4c80af3028698c778cc6)
 - 팀 회고록 : [https://www.notion.so/9788325e0cff4c80af3028698c778cc6](https://www.notion.so/9788325e0cff4c80af3028698c778cc6)
 
+<br /><br />
+
+### 사용한 데이터
+- 네이버 지식인 질문
+- 진료과 별 병원 정보(모두닥 어플)
+- 질문 별 상담자료집(심평원)
+- 피부 질환 이미지(Kaggle)
 
 
 
